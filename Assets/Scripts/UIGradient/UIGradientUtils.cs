@@ -85,8 +85,6 @@ namespace NWR.UIGradient
             c.tangent = Vector3.LerpUnclamped(a.tangent, b.tangent, t);
             c.uv0 = Vector3.LerpUnclamped(a.uv0, b.uv0, t);
             c.uv1 = Vector3.LerpUnclamped(a.uv1, b.uv1, t);
-            // c.uv2 = Vector3.LerpUnclamped(a.uv2, b.uv2, t);
-            // c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);		
         }
     }
 }

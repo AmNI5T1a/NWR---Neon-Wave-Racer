@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1666d4d1a8f47c04799b0e5660ce6fe2, type: 3}
-  m_Name: Delorian 80
+  m_Name: Loktra Essens
   m_EditorClassIdentifier: 
-  ID: 1
-  Denomination: Delorian 80s
-  price: 9900
-  description: Old American car
-  prefab: {fileID: 8902556094683536476, guid: 7ee11172ce29dab4a928c439d6281b80, type: 3}
+  ID: 0
+  Denomination: Loktra Essens
+  price: 0
+  description: default car
+  prefab: {fileID: 5001476948807846368, guid: 7364a994a68609e4b8b8ba745cf4be9a, type: 3}
