@@ -216,9 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e988e68b4a65148b9dae245f4c2e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listPosition_ON_screen: {x: 0, y: 0}
-  listPosition_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  listGameObject: {fileID: 1774623300}
+  listOnScreen: 0
 --- !u!114 &268689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,8 +263,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 268688}
-        m_TargetAssemblyTypeName: NWR.Lobby.UI_ShowList, Assembly-CSharp
-        m_MethodName: ShowList
+        m_TargetAssemblyTypeName: NWR.Lobby.UI_ListButton, Assembly-CSharp
+        m_MethodName: ShowOrHideList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1261,7 +1260,7 @@ GameObject:
   - component: {fileID: 522034558}
   - component: {fileID: 522034557}
   m_Layer: 5
-  m_Name: Car List
+  m_Name: List of Cars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1334,13 +1333,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 522034553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69aac9da7e82d6543a779d2ab60cc9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: -835, y: 124}
-  position_OUT_ofScreen: {x: 617, y: 124}
-  leap: {x: 60, y: 0}
-  isActive: 0
+  position_ON_Screen: {x: 0, y: 0}
+  position_OUT_ofScreen: {x: 0, y: 0}
+  leap: {x: 0, y: 0}
+  onScreen: 0
 --- !u!225 &522034558
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1367,7 +1366,7 @@ GameObject:
   - component: {fileID: 685537817}
   - component: {fileID: 685537816}
   m_Layer: 5
-  m_Name: 'List of Game Modes '
+  m_Name: List of Game Modes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,13 +1438,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 685537812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69aac9da7e82d6543a779d2ab60cc9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: 400, y: -531}
-  position_OUT_ofScreen: {x: 400, y: 307}
-  leap: {x: 0, y: 20}
-  isActive: 0
+  position_ON_Screen: {x: 0, y: 0}
+  position_OUT_ofScreen: {x: 0, y: 0}
+  leap: {x: 0, y: 0}
+  onScreen: 0
 --- !u!225 &685537817
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2675,9 +2674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e988e68b4a65148b9dae245f4c2e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listPosition_ON_screen: {x: 0, y: 0}
-  listPosition_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  listGameObject: {fileID: 522034553}
+  listOnScreen: 0
 --- !u!114 &1298123236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2723,8 +2721,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1298123235}
-        m_TargetAssemblyTypeName: NWR.Lobby.UI_ShowList, Assembly-CSharp
-        m_MethodName: ShowList
+        m_TargetAssemblyTypeName: NWR.Lobby.UI_ListButton, Assembly-CSharp
+        m_MethodName: ShowOrHideList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3316,9 +3314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e988e68b4a65148b9dae245f4c2e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listPosition_ON_screen: {x: 0, y: 0}
-  listPosition_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  listGameObject: {fileID: 685537812}
+  listOnScreen: 0
 --- !u!114 &1565661534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3364,8 +3361,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1565661533}
-        m_TargetAssemblyTypeName: NWR.Lobby.UI_ShowList, Assembly-CSharp
-        m_MethodName: ShowList
+        m_TargetAssemblyTypeName: NWR.Lobby.UI_ListButton, Assembly-CSharp
+        m_MethodName: ShowOrHideList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3932,13 +3929,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774623300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69aac9da7e82d6543a779d2ab60cc9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: -400, y: -531}
-  position_OUT_ofScreen: {x: -400, y: 300}
-  leap: {x: 0, y: 30}
-  isActive: 0
+  position_ON_Screen: {x: 0, y: 0}
+  position_OUT_ofScreen: {x: 0, y: 0}
+  leap: {x: 0, y: 0}
+  onScreen: 0
 --- !u!225 &1774623305
 CanvasGroup:
   m_ObjectHideFlags: 0
