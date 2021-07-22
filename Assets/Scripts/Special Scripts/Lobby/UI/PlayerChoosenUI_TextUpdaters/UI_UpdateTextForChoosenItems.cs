@@ -3,7 +3,7 @@ using NWR.Modules;
 
 namespace NWR.Lobby
 {
-    [RequireComponent(typeof(I_UI_TextUpdated))]
+    [RequireComponent(typeof(UI_UpdateTextBoxInfo_Factory))]
     public class UI_UpdateTextForChoosenItems : MonoBehaviour
     {
         void Awake()
@@ -12,7 +12,7 @@ namespace NWR.Lobby
         }
         public void SetNewText(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
         {
-            this.gameObject.GetComponent<I_UI_TextUpdated>().UpdateText(e);
+            this.gameObject.GetComponent<UI_UpdateTextBoxInfo_Factory>().UpdateText(e);
         }
     }
 }

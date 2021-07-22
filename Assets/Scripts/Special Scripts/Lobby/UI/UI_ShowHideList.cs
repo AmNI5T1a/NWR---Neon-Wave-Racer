@@ -21,15 +21,11 @@ namespace NWR.Lobby
         public void ShowOrHide()
         {
             if (isActive)
-            {
                 StartCoroutine(Hide());
-                isActive = !isActive;
-            }
             else
-            {
                 StartCoroutine(Show());
-                isActive = !isActive;
-            }
+
+            isActive = !isActive;
         }
         public IEnumerator Hide()
         {
