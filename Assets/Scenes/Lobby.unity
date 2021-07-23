@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listGameObject: {fileID: 1774623300}
-  listOnScreen: 0
 --- !u!114 &268689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,9 +1335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: 0, y: 0}
-  position_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  position_ON_Screen: {x: -845, y: 124}
+  position_OUT_ofScreen: {x: 617, y: 124}
+  leap: {x: 40, y: 0}
   onScreen: 0
 --- !u!225 &522034558
 CanvasGroup:
@@ -1441,9 +1440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: 0, y: 0}
-  position_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  position_ON_Screen: {x: 400, y: -520}
+  position_OUT_ofScreen: {x: 400, y: 307}
+  leap: {x: 0, y: 50}
   onScreen: 0
 --- !u!225 &685537817
 CanvasGroup:
@@ -2675,7 +2674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listGameObject: {fileID: 522034553}
-  listOnScreen: 0
 --- !u!114 &1298123236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3315,7 +3313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listGameObject: {fileID: 685537812}
-  listOnScreen: 0
 --- !u!114 &1565661534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,9 +3929,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3816e3655e4e304ba457332d399ce1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_ON_Screen: {x: 0, y: 0}
-  position_OUT_ofScreen: {x: 0, y: 0}
-  leap: {x: 0, y: 0}
+  position_ON_Screen: {x: -400, y: -520}
+  position_OUT_ofScreen: {x: -400, y: 307}
+  leap: {x: 0, y: 50}
   onScreen: 0
 --- !u!225 &1774623305
 CanvasGroup:
