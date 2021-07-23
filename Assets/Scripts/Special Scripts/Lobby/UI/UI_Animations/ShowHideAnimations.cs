@@ -29,13 +29,12 @@ namespace NWR.Lobby
         }
         public IEnumerator ShowAnimation()
         {
-            Debug.Log("Trying to play show aniamtion");
             _sequence = DOTween.Sequence();
-            this.objectToAnimate.GetComponent<CanvasGroup>().interactable = false;
+            this.objectToAnimate.GetComponent<CanvasGroup>().interactable = true;
             RectTransform rectTransform = this.objectToAnimate.GetComponent<RectTransform>();
 
-            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen - leap, 0.15f));
-            _sequence.Append(rectTransform.DOAnchorPos(position_OUT_ofScreen, 0.35f));
+            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen - leap, 0.35f));
+            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen, 0.15f));
             yield return new WaitForSeconds(1.05f);
 
             _sequence.AppendCallback(() => { KillSequence(_sequence); });
@@ -43,13 +42,12 @@ namespace NWR.Lobby
 
         public IEnumerator HideAnimation()
         {
-            Debug.Log("Trying to play hide animation");
             _sequence = DOTween.Sequence();
-            this.objectToAnimate.GetComponent<CanvasGroup>().interactable = true;
+            this.objectToAnimate.GetComponent<CanvasGroup>().interactable = false;
             RectTransform rectTransform = this.objectToAnimate.GetComponent<RectTransform>();
 
-            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen - leap, 0.35f));
-            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen, 0.15f));
+            _sequence.Append(rectTransform.DOAnchorPos(position_ON_Screen - leap, 0.15f));
+            _sequence.Append(rectTransform.DOAnchorPos(position_OUT_ofScreen, 0.35f));
             yield return new WaitForSeconds(1.05f);
 
             _sequence.AppendCallback(() => { KillSequence(_sequence); });

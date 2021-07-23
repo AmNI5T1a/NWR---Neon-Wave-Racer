@@ -26,7 +26,7 @@ namespace NWR.Lobby
                     var item_template_prefab = Resources.Load("Car item-template");
                     GameObject obj = Instantiate(item_template_prefab, this.gameObject.transform) as GameObject;
 
-                    Debug.Log("UI_CreateCarItem Not implemented exception");
+                    Debug.Log("UI_CreateCarItem script:  Not implemented exception");
 
                     obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = car.item.GetName();
                 }

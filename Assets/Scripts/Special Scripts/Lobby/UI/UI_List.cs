@@ -14,30 +14,29 @@ namespace NWR.Lobby
         [SerializeField] private Vector2 leap;
 
         [Header("Play mode stats:")]
-        [ReadOnly, SerializeField] private bool onScreen = false;
+        [ReadOnly, SerializeField] private bool onScreen = true;
 
 
+        private ShowHideAnimations showHide_Animations;
         private Sequence _sequence;
 
         void Start()
         {
-
         }
 
         public void ShowOrHideUIComponent()
         {
-            ShowHideAnimations animations = new ShowHideAnimations(this.gameObject, position_ON_Screen, position_OUT_ofScreen, leap);
+            showHide_Animations = new ShowHideAnimations(instance: this.gameObject,
+                                                        position_ON_Screen: position_ON_Screen,
+                                                        position_OUT_ofScreen: position_OUT_ofScreen,
+                                                        leap: leap);
 
             if (onScreen)
-            {
-                StartCoroutine(animations.HideAnimation());
-                onScreen = !onScreen;
-            }
+                StartCoroutine(showHide_Animations.HideAnimation());
             else
-            {
-                StartCoroutine(animations.ShowAnimation());
-                onScreen = !onScreen;
-            }
+                StartCoroutine(showHide_Animations.ShowAnimation());
+
+            onScreen = !onScreen;
         }
     }
 }
