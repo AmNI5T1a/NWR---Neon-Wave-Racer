@@ -9,6 +9,8 @@ namespace NWR.Modules
         private static bool sceneIsLoading;
         private AsyncOperation operation;
 
+
+
         void Awake()
         {
             InstanciateLoadingScreenCanvasFromRes();
@@ -23,14 +25,6 @@ namespace NWR.Modules
             var loadingScreen = Resources.Load("Loading Screen (Canvas)");
             var obj = Instantiate(loadingScreen) as GameObject;
             obj.transform.SetParent(this.gameObject.transform);
-        }
-
-        public void LoadScene(int sceneIdToLoad)
-        {
-            if (!sceneIsLoading)
-                StartCoroutine(Load(sceneIdToLoad));
-            else
-                Debug.LogWarning("Scene is already loading!");
         }
 
         private IEnumerator Load(int sceneIdToLoad)
@@ -66,6 +60,14 @@ namespace NWR.Modules
 
             sceneIsLoading = false;
             Destroy(this.gameObject);
+        }
+
+        public void LoadScene(int sceneIdToLoad)
+        {
+            if (!sceneIsLoading)
+                StartCoroutine(Load(sceneIdToLoad));
+            else
+                Debug.LogWarning("Scene is already loading!");
         }
     }
 }

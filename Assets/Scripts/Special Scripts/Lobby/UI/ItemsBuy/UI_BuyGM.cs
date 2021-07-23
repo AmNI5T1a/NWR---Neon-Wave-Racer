@@ -3,11 +3,11 @@ using UnityEngine;
 namespace NWR.Lobby
 {
 
-    public class Ui_BuyGM : MonoBehaviour, I_UI_ItemBuyer
+    public class Ui_BuyGM : MonoBehaviour, I_UI_ItemPreview
     {
-        public void BuyItem()
+        public void PreviewItem()
         {
-            Debug.Log("Logiic for buy this game mode");
+            Debug.LogWarning("UI_BuyGameMode script: Not implemented exception");
         }
     }
 }

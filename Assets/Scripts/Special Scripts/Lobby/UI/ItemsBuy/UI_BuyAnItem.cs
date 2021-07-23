@@ -1,20 +1,21 @@
+using NWR.Modules;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace NWR.Lobby
 {
-    [RequireComponent(typeof(I_UI_ItemBuyer))]
+    [RequireComponent(typeof(I_UI_ItemPreview))]
     public class UI_BuyAnItem : MonoBehaviour
     {
         void Start()
         {
             Button btn = this.gameObject.transform.GetChild(1).GetComponent<Button>();
-            btn.onClick.AddListener(() => Buy(this.gameObject.GetComponent<I_UI_ItemBuyer>()));
+            btn.onClick.AddListener(() => Buy(this.gameObject.GetComponent<I_UI_ItemPreview>()));
         }
 
-        private void Buy(I_UI_ItemBuyer buyer)
+        private void Buy(I_UI_ItemPreview previewer)
         {
-            buyer.BuyItem();
+            previewer.PreviewItem();
         }
     }
 }
