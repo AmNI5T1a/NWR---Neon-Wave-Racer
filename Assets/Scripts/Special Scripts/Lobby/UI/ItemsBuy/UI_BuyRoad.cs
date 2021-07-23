@@ -3,11 +3,11 @@ using UnityEngine;
 namespace NWR.Lobby
 {
 
-    public class UI_BuyRoad : MonoBehaviour, I_UI_ItemBuyer
+    public class UI_BuyRoad : MonoBehaviour, I_UI_ItemPreview
     {
-        public void BuyItem()
+        public void PreviewItem()
         {
-            Debug.Log("Logiic for buy this road");
+            Debug.LogWarning("UI_BuyRoad script: Not implemented exception");
         }
     }
 }

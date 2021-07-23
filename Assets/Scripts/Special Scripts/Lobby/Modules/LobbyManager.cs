@@ -10,27 +10,30 @@ namespace NWR.Lobby
         [Header("Stats: ")]
         [SerializeField] public Vector3 playerCarPosition;
 
-        [Header("Play mode stats:")]
-        [SerializeField] public GameObject playerCar;
+        [Header("Info box: ")]
+        [ReadOnly, SerializeField] public Car playerCar;
+        [ReadOnly, SerializeField] public GameObject playerCarGameObject;
 
 
         void Awake()
         {
             if (Instance == null)
-            {
                 Instance = this;
-            }
             else
-            {
                 Destroy(this.gameObject);
-            }
 
-            Assets.OnSendPlayerSelectedItems += InstanciatePlayerCar;
+            Assets.OnSendPlayerSelectedItems += SetAndInstanciatePlayerCar;
         }
 
-        public void InstanciatePlayerCar(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
+        public void SetAndInstanciatePlayerCar(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
         {
-            GameObject car = Instantiate(e.playerCar.item.GetCarAsGameObject(), playerCarPosition, Quaternion.identity);
+            playerCarGameObject = Instantiate(e.playerCar.item.GetCarAsGameObject(), playerCarPosition, Quaternion.identity);
+            playerCar = e.playerCar.item;
+        }
+
+        private void OnDestroy()
+        {
+            Assets.OnSendPlayerSelectedItems -= SetAndInstanciatePlayerCar;
         }
     }
 }

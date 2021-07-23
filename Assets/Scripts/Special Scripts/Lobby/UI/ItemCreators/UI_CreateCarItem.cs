@@ -16,8 +16,9 @@ namespace NWR.Lobby
                     var item_template_prefab = Resources.Load("Car item-template");
                     GameObject obj = Instantiate(item_template_prefab, this.gameObject.transform) as GameObject;
 
-                    UI_BuyAnItem script = obj.AddComponent<UI_BuyAnItem>();
-                    UI_BuyCar carBuyScript = obj.AddComponent<UI_BuyCar>();
+                    UI_BuyAnItem buyAnItem_instance = obj.AddComponent<UI_BuyAnItem>();
+                    UI_BuyCar buyCar_instance = obj.AddComponent<UI_BuyCar>();
+                    buyCar_instance.carToBuy = car.item;
 
                     obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = car.item.GetName();
                 }
@@ -26,7 +27,10 @@ namespace NWR.Lobby
                     var item_template_prefab = Resources.Load("Car item-template");
                     GameObject obj = Instantiate(item_template_prefab, this.gameObject.transform) as GameObject;
 
-                    Debug.Log("UI_CreateCarItem script:  Not implemented exception");
+                    UI_ChooseAnItem chooseAnItem_instance = obj.AddComponent<UI_ChooseAnItem>();
+                    chooseAnItem_instance.UI_ChooseAnItemConstructor(instance: car);
+                    obj.AddComponent<UI_ChooseCarItem>();
+
 
                     obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = car.item.GetName();
                 }
