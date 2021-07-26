@@ -9,10 +9,12 @@ namespace NWR.Lobby
         public void ChooseThisItem(Assets.ItemAndStats<Car> carInstance)
         {
             if (carInstance.item == LobbyManager.Instance.playerCar)
+            {
+                if (ShopSystem.Instance.previewModeActive)
+                    ShopSystem.Instance.ClosePreviewMode();
                 return;
+            }
 
-            if (ShopSystem.Instance.previewModeActive == true)
-                ShopSystem.Instance.ClosePreviewMode();
 
             LobbyManager.Instance.playerCarGameObject = carInstance.item.GetCarAsGameObject();
             LobbyManager.Instance.playerCar = carInstance.item;

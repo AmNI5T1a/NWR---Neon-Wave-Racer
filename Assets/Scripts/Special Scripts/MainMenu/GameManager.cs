@@ -14,10 +14,5 @@ namespace NWR.MainMenu
                 _instance = this;
             }
         }
-
-        void Start()
-        {
-
-        }
     }
 }

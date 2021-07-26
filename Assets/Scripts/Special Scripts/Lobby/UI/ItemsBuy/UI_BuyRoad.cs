@@ -3,7 +3,7 @@ using UnityEngine;
 namespace NWR.Lobby
 {
 
-    public class UI_BuyRoad : MonoBehaviour, I_UI_ItemPreview
+    public class UI_BuyRoad : MonoBehaviour, I_UI_ItemBuy
     {
         public void PreviewItem()
         {
