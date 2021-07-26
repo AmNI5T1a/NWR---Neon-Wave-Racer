@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
+    [Header("Params: ")]
     [Range(0f, 0.15f)]
     [SerializeField] private float _rotationSpeed;
 

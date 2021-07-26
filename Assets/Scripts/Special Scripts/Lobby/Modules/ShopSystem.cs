@@ -20,6 +20,8 @@ namespace NWR.Lobby
             this.carForPreview = carForPreview;
             this.preview_UI_Component = preview_UI_Component;
             this.buyButton_UI_Component = buyButton_UI_Component;
+
+            previewModeActive = true;
         }
 
 
@@ -28,11 +30,13 @@ namespace NWR.Lobby
         {
             Debug.Log("Closing preview mode");
 
-            LobbyManager.Instance.playerCarGameObject.SetActive(true);
-
             Destroy(carForPreview);
             Destroy(preview_UI_Component);
             Destroy(buyButton_UI_Component);
+
+            LobbyManager.Instance.playerCarGameObject.SetActive(true);
+
+            previewModeActive = false;
         }
     }
 }
