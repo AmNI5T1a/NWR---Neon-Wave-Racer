@@ -19,8 +19,8 @@ namespace NWR.Modules
             selectedRoadID = Player.Instance.selectedRoadID;
             selectedGameModeID = Player.Instance.selectedGameModeID;
 
-            ID_OfAllPurchasedCars = Player.Instance.boughtCars_List.ToArray();
-            ID_OfAllPurchasedRoads = Player.Instance.boughtRoads_List.ToArray();
+            ID_OfAllPurchasedCars = Player.Instance.listOfPurchasedItemIDs.boughtCars.ToArray();
+            ID_OfAllPurchasedRoads = Player.Instance.listOfPurchasedItemIDs.boughtRoads.ToArray();
         }
     }
 }
