@@ -8,8 +8,30 @@ namespace NWR.Modules
     {
         public static Player Instance { get; private set; }
 
-        public static event Action<List<int>> OnGetIDsOfBoughtCars;
-        public static event Action<List<int>> OnGetIDsOfBoughtRoads;
+
+
+        public uint money;
+
+        public ushort selectedCarID;
+        public ushort selectedRoadID;
+        public ushort selectedGameModeID;
+        public ID_ListsOfPurchasedItems listOfPurchasedItemIDs;
+
+
+
+        public static EventHandler<ID_ListsOfPurchasedItems> OnSendBoughtItemIDs;
+
+        public class ID_ListsOfPurchasedItems
+        {
+            public List<int> boughtCars { get; set; }
+            public List<int> boughtRoads { get; set; }
+
+            public ID_ListsOfPurchasedItems(List<int> car_IDs, List<int> road_IDs)
+            {
+                this.boughtCars = car_IDs;
+                this.boughtRoads = road_IDs;
+            }
+        }
 
 
         public static EventHandler<PlayerSelectedItemIDsEventArgs> OnSendPlayerSelectedItemIDs;
@@ -21,15 +43,6 @@ namespace NWR.Modules
         }
 
 
-
-        public uint money;
-
-        public ushort selectedCarID;
-        public ushort selectedRoadID;
-        public ushort selectedGameModeID;
-
-        public List<int> boughtCars_List = new List<int>();
-        public List<int> boughtRoads_List = new List<int>();
 
         void Awake()
         {
@@ -49,8 +62,7 @@ namespace NWR.Modules
             LoadPlayerDataOnStart();
 
             // * Loading all game objects and UI components
-            OnGetIDsOfBoughtCars?.Invoke(boughtCars_List);
-            OnGetIDsOfBoughtRoads?.Invoke(boughtRoads_List);
+            OnSendBoughtItemIDs?.Invoke(this, listOfPurchasedItemIDs);
 
             OnSendPlayerSelectedItemIDs?.Invoke(this, new PlayerSelectedItemIDsEventArgs
             {
@@ -71,8 +83,7 @@ namespace NWR.Modules
             selectedRoadID = loadedData.selectedRoadID;
             selectedGameModeID = loadedData.selectedGameModeID;
 
-            boughtCars_List = new List<int>(loadedData.ID_OfAllPurchasedCars);
-            boughtRoads_List = new List<int>(loadedData.ID_OfAllPurchasedRoads);
+            listOfPurchasedItemIDs = new ID_ListsOfPurchasedItems(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
         }
     }
 }

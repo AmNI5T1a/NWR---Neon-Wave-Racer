@@ -7,6 +7,9 @@ namespace NWR.Modules
 {
     public class Assets : MonoBehaviour
     {
+        public static Assets Instance;
+
+
         [System.Serializable]
         public class ItemAndStats<T> where T : Item
         {
@@ -39,14 +42,18 @@ namespace NWR.Modules
 
         void Awake()
         {
-            Player.OnGetIDsOfBoughtCars += SetPurchasedStatusForCars;
-            Player.OnGetIDsOfBoughtRoads += SetPurchasedStatusForRoads;
+            Player.OnSendBoughtItemIDs += LoadPurchasedItems;
 
             Player.OnSendPlayerSelectedItemIDs += FindAndSendItemsInformation;
         }
 
         void Start()
         {
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this.gameObject);
+
             OnSendItems?.Invoke(this, new OnSendItemsEventArgs
             {
                 cars_List = this.cars_list,
@@ -55,27 +62,19 @@ namespace NWR.Modules
             });
         }
 
-
-        // ? Can i recode it to 1 method
-        // ! 2 same methods cause id of each child from item starts with 0
-        // ! Lists don't know about each other
-        #region LoadAlreadyPurchasedCars
-        private void SetPurchasedStatusForCars(List<int> IDs_ofPurchasedItems)
+        private void LoadPurchasedItems(object sender, Player.ID_ListsOfPurchasedItems lists)
         {
             foreach (ItemAndStats<Car> item in cars_list)
             {
-                item.isBought = IDs_ofPurchasedItems.Contains(item.item.GetID());
+                item.isBought = lists.boughtCars.Contains(item.item.GetID());
+            }
+
+            foreach (ItemAndStats<Road> item in roads_list)
+            {
+                item.isBought = lists.boughtRoads.Contains(item.item.GetID());
             }
         }
 
-        private void SetPurchasedStatusForRoads(List<int> IDs_ofPurchasedItems)
-        {
-            foreach (ItemAndStats<Road> item in roads_list)
-            {
-                item.isBought = IDs_ofPurchasedItems.Contains(item.item.GetID());
-            }
-        }
-        #endregion LoadAlreadyPurchasedCars
         private void FindAndSendItemsInformation(object sender, Player.PlayerSelectedItemIDsEventArgs e)
         {
             OnSendPlayerSelectedItemsEventArgs playerItems = new OnSendPlayerSelectedItemsEventArgs();

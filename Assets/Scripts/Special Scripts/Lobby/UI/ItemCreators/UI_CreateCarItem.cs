@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using NWR.Modules;
 using TMPro;
 
 namespace NWR.Lobby
 {
-    class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator
+    class UI_CreateCarItem : MonoBehaviour, I_UI_CreateDeleteItem
     {
+        Dictionary<Car, GameObject> generatedCarsUI_Components_dictionary = new Dictionary<Car, GameObject>();
         public void CreateItem(Assets.OnSendItemsEventArgs items)
         {
+            generatedCarsUI_Components_dictionary = new Dictionary<Car, GameObject>();
+
             foreach (Assets.ItemAndStats<Car> car in items.cars_List)
             {
                 if (!car.isBought)
@@ -21,6 +25,8 @@ namespace NWR.Lobby
                     buyCar_instance.carToBuy = car.item;
 
                     obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = car.item.GetName();
+
+                    generatedCarsUI_Components_dictionary.Add(car.item, obj);
                 }
                 else
                 {
@@ -33,8 +39,15 @@ namespace NWR.Lobby
 
 
                     obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = car.item.GetName();
+
+                    generatedCarsUI_Components_dictionary.Add(car.item, obj);
                 }
             }
+        }
+
+        public void DeleteItem<T>(T item) where T : Item
+        {
+
         }
     }
 }
