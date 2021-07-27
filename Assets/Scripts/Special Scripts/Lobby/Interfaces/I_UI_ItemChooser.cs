@@ -4,6 +4,6 @@ namespace NWR.Lobby
 {
     public interface I_UI_ItemChooser
     {
-        void ChooseThisItem(Assets.ItemAndStats<Car> carInstance);
+        void ChooseThisItem();
     }
 }

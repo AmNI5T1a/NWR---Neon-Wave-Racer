@@ -5,14 +5,23 @@ using TMPro;
 
 namespace NWR.Lobby
 {
-    class UI_CreateRoadItem : MonoBehaviour, I_UI_CreateDeleteItem
+    class UI_CreateRoadItem : MonoBehaviour, I_UI_ItemCreator, I_UI_ItemUpdater
     {
-        public void CreateItem(Assets.OnSendItemsEventArgs items)
+        public void CreateItemsAtStart(Assets.OnSendAssetsEventArgs assets)
         {
-            Debug.LogError("UI_CreateRoadUtem not implemented");
+            foreach (Assets.ItemAndStats<Road> instance in assets.roads_List)
+            {
+                CreateUIComponent(instance);
+            }
         }
 
-        public void DeleteItem<T>(T item) where T : Item
+
+        public void CreateUIComponent(Assets.ItemAndStats<Road> instance)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateUIComponent<T>(Assets.ItemAndStats<T> instance) where T : Item
         {
             throw new System.NotImplementedException();
         }
