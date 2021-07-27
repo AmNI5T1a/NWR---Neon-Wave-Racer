@@ -8,10 +8,7 @@ namespace NWR.Modules
     {
         public static Player Instance { get; private set; }
 
-
-
         public uint money;
-
         public ushort selectedCarID;
         public ushort selectedRoadID;
         public ushort selectedGameModeID;
@@ -20,7 +17,6 @@ namespace NWR.Modules
 
 
         public static EventHandler<ID_ListsOfPurchasedItems> OnSendBoughtItemIDs;
-
         public class ID_ListsOfPurchasedItems
         {
             public List<int> boughtCars { get; set; }
@@ -32,7 +28,6 @@ namespace NWR.Modules
                 this.boughtRoads = road_IDs;
             }
         }
-
 
         public static EventHandler<PlayerSelectedItemIDsEventArgs> OnSendPlayerSelectedItemIDs;
         public class PlayerSelectedItemIDsEventArgs : EventArgs
@@ -58,10 +53,8 @@ namespace NWR.Modules
 
         void Start()
         {
-            // * Update Player statistics
             LoadPlayerDataOnStart();
 
-            // * Loading all game objects and UI components
             OnSendBoughtItemIDs?.Invoke(this, listOfPurchasedItemIDs);
 
             OnSendPlayerSelectedItemIDs?.Invoke(this, new PlayerSelectedItemIDsEventArgs
