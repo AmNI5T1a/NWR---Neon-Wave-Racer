@@ -1,5 +1,6 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using NWR.Modules;
 
 namespace NWR.Lobby
@@ -24,7 +25,10 @@ namespace NWR.Lobby
             previewModeActive = true;
         }
 
+        public void UpdateUIComponent<T>(T item) where T : Item
+        {
 
+        }
 
         public void ClosePreviewMode()
         {

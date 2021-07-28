@@ -1,13 +1,14 @@
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using NWR.Modules;
 using TMPro;
-using System;
 
 namespace NWR.Lobby
 {
     class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator, I_UI_ItemUpdater
     {
+        public static Dictionary<Car, GameObject> car_ui_gmComponents = new Dictionary<Car, GameObject>();
         public void CreateItemsAtStart(Assets.OnSendAssetsEventArgs assets)
         {
             foreach (Assets.ItemAndStats<Car> car in assets.cars_List)
@@ -23,38 +24,36 @@ namespace NWR.Lobby
 
             if (instance.isBought)
             {
-                CreateBoughtItem(instance.item);
+                CreateBoughtItem(instance.item, ref gameObject_instance);
             }
             else
-                CreatePurchasableItem(instance.item);
-
+                CreatePurchasableItem(instance.item, ref gameObject_instance);
 
             gameObject_instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = instance.item.GetName();
+
+            car_ui_gmComponents.Add(instance.item, gameObject_instance);
         }
 
 
-        private void CreateBoughtItem(Car car)
+        private void CreateBoughtItem(Car car, ref GameObject UI_Component_instance)
         {
-            UI_ChooseCarItem ui_carItemChooser = this.gameObject.AddComponent<UI_ChooseCarItem>();
+            UI_ChooseCarItem ui_carItemChooser = UI_Component_instance.gameObject.AddComponent<UI_ChooseCarItem>();
             ui_carItemChooser.carToChoose = car;
 
-            UI_ItemChooser ui_itemChooser = this.gameObject.AddComponent<UI_ItemChooser>();
+            UI_ItemChooser ui_itemChooser = UI_Component_instance.gameObject.AddComponent<UI_ItemChooser>();
         }
 
-        private void CreatePurchasableItem(Car car)
+        private void CreatePurchasableItem(Car car, ref GameObject UI_Component_instance)
         {
-            UI_BuyCar ui_carItemBuyer = this.gameObject.AddComponent<UI_BuyCar>();
+            UI_BuyCar ui_carItemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyCar>();
             ui_carItemBuyer.carToBuy = car;
 
-            UI_BuyAnItem ui_itemBuyer = this.gameObject.AddComponent<UI_BuyAnItem>();
-            ui_itemBuyer.Buy(ui_carItemBuyer);
+            UI_BuyAnItem ui_itemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyAnItem>();
         }
 
-
-
-        public void UpdateUIComponent<T>(Assets.ItemAndStats<T> instance) where T : Item
+        public void UpdateUIComponent<T>(T item) where T : Item
         {
-            throw new NotImplementedException();
+
         }
     }
 }

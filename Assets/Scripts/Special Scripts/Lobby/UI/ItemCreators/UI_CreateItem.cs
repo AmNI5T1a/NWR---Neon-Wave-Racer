@@ -14,8 +14,13 @@ namespace NWR.Lobby
         private void CreateItemsAtStart(object sender, Assets.OnSendAssetsEventArgs assets)
         {
             I_UI_ItemCreator creator = this.gameObject.GetComponent<I_UI_ItemCreator>();
-
             creator.CreateItemsAtStart(assets);
+        }
+
+        private void UpdateItemInUIComponent<T>(T item) where T : Item
+        {
+            I_UI_ItemUpdater updater = this.gameObject.GetComponent<I_UI_ItemUpdater>();
+            updater.UpdateUIComponent(item);
         }
     }
 }

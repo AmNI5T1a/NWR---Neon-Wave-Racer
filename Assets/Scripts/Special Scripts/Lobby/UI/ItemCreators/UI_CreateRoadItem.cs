@@ -25,5 +25,10 @@ namespace NWR.Lobby
         {
             throw new System.NotImplementedException();
         }
+
+        public void UpdateUIComponent<T>(T item) where T : Item
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
