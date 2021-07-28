@@ -29,7 +29,7 @@ namespace NWR.Lobby
             gameObject_instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = instance.item.GetName();
         }
 
-        public void UpdateUIComponent<T>(Assets.ItemAndStats<T> instance) where T : Item
+        public void UpdateUIComponent<T>(T item) where T : Item
         {
             throw new System.NotImplementedException();
         }

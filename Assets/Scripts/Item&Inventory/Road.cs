@@ -5,7 +5,7 @@ using NWR.Modules;
 namespace NWR.Modules
 {
     [CreateAssetMenu(fileName = "Road", menuName = "NWR/Items/Road")]
-    public class Road : Item, IBuyable
+    public class Road : Item
     {
         [SerializeField] private uint price;
         [SerializeField] private string description;

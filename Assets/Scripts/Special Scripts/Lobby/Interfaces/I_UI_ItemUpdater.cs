@@ -4,6 +4,6 @@ namespace NWR.Lobby
 {
     public interface I_UI_ItemUpdater
     {
-        void UpdateUIComponent<T>(Assets.ItemAndStats<T> instance) where T : Item;
+        void UpdateUIComponent<T>(T item) where T : Item;
     }
 }

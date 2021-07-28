@@ -9,12 +9,13 @@ namespace NWR.Modules
         public static Player Instance { get; private set; }
 
         public uint money;
+        public uint donation;
         public ushort selectedCarID;
         public ushort selectedRoadID;
         public ushort selectedGameModeID;
         public ID_ListsOfPurchasedItems listOfPurchasedItemIDs;
 
-
+        public static event Action<uint, uint> OnSendPlayerStats = delegate { };
 
         public static EventHandler<ID_ListsOfPurchasedItems> OnSendBoughtItemIDs;
         public class ID_ListsOfPurchasedItems
@@ -64,6 +65,8 @@ namespace NWR.Modules
                 gameMode_ID = selectedGameModeID
 
             });
+
+            OnSendPlayerStats(Instance.money, Instance.donation);
         }
 
         private void LoadPlayerDataOnStart()

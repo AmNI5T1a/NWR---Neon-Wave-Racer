@@ -61,6 +61,7 @@ namespace NWR.Modules
                 Instance = this;
             else
                 Destroy(this.gameObject);
+
         }
 
         private void LoadPurchasedItems(object sender, Player.ID_ListsOfPurchasedItems lists)
