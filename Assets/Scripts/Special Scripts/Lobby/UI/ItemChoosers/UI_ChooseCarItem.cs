@@ -18,8 +18,7 @@ namespace NWR.Lobby
             }
 
 
-            LobbyManager.Instance.playerCarGameObject = carToChoose.GetCarAsGameObject();
-            LobbyManager.Instance.playerCar = carToChoose;
+            LobbyManager.Instance.UpdatePlayerCar(carToChoose);
         }
     }
 }

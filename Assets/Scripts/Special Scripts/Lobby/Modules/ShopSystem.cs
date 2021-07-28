@@ -32,8 +32,6 @@ namespace NWR.Lobby
 
         public void ClosePreviewMode()
         {
-            Debug.Log("Closing preview mode");
-
             Destroy(carForPreview);
             Destroy(preview_UI_Component);
             Destroy(buyButton_UI_Component);

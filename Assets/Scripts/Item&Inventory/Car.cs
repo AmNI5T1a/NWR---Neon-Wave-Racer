@@ -22,16 +22,22 @@ namespace NWR.Modules
             // TODO: Add car to bought IDs list
             // TODO: Close preview mode
             // TODO: update UI
+            // TODO: set this as selected
             // TODO: save game
 
             if (Player.Instance.money >= price)
             {
                 Player.Instance.money -= price;
+
                 Player.Instance.listOfPurchasedItemIDs.boughtCars.Add(this.GetID());
+
+                Assets.ItemAndStats<Car> car = Assets.Instance.cars_list.First(x => x.item.GetID() == this.GetID());
+                car.isBought = true;
+
+                Player.Instance.ChangeSelectedCar(this.GetID());
+
                 ShopSystem.Instance.ClosePreviewMode();
-                GameObject gm = UI_CreateCarItem.car_ui_gmComponents.First(x => x.Key.GetID() == this.GetID()).Value;
-                DestroyImmediate(gm);
-                /*SaveSystem.Save();*/
+                Player.Instance.UpdatePlayerStats();
             }
             else
             {
