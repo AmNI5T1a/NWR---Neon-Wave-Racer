@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using NWR.Lobby;
 using UnityEngine;
 
 namespace NWR.Modules
@@ -66,8 +68,9 @@ namespace NWR.Modules
 
             });
 
-            OnSendPlayerStats(Instance.money, Instance.donation);
+            UpdatePlayerStats();
         }
+
 
         private void LoadPlayerDataOnStart()
         {
@@ -80,6 +83,19 @@ namespace NWR.Modules
             selectedGameModeID = loadedData.selectedGameModeID;
 
             listOfPurchasedItemIDs = new ID_ListsOfPurchasedItems(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
+        }
+
+
+        public void ChangeSelectedCar(ushort newCarID)
+        {
+            this.selectedCarID = newCarID;
+            Car newCar = Assets.Instance.cars_list.First(x => x.item.GetID() == newCarID).item;
+            LobbyManager.Instance.UpdatePlayerCar(newCar);
+        }
+
+        public void UpdatePlayerStats()
+        {
+            OnSendPlayerStats(Instance.money, Instance.donation);
         }
     }
 }

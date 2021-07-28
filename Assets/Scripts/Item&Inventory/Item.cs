@@ -4,10 +4,10 @@ namespace NWR.Modules
 {
     public class Item : ScriptableObject
     {
-        [SerializeField] protected int ID;
+        [SerializeField] protected ushort ID;
         [SerializeField] protected string Denomination;
 
-        public int GetID() => ID;
+        public ushort GetID() => ID;
         public string GetName() => Denomination;
     }
 }

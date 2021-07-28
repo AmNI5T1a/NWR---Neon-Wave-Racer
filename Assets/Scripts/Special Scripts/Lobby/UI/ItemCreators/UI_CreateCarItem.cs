@@ -6,7 +6,7 @@ using TMPro;
 
 namespace NWR.Lobby
 {
-    class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator, I_UI_ItemUpdater
+    class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator
     {
         public static Dictionary<Car, GameObject> car_ui_gmComponents = new Dictionary<Car, GameObject>();
         public void CreateItemsAtStart(Assets.OnSendAssetsEventArgs assets)
@@ -49,11 +49,6 @@ namespace NWR.Lobby
             ui_carItemBuyer.carToBuy = car;
 
             UI_BuyAnItem ui_itemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyAnItem>();
-        }
-
-        public void UpdateUIComponent<T>(T item) where T : Item
-        {
-
         }
     }
 }
