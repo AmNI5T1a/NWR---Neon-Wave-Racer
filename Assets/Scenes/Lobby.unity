@@ -2416,6 +2416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
+  donation: 0
   selectedCarID: 0
   selectedRoadID: 0
   selectedGameModeID: 0
@@ -3220,7 +3221,7 @@ GameObject:
   - component: {fileID: 1361200479}
   m_Layer: 5
   m_Name: UI Main
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
