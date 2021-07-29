@@ -38,8 +38,7 @@ namespace NWR.Modules
             }
             else
             {
-                Debug.Log("Player doesn't have enough money");
-                Debug.LogWarning("Notification window not implemented exception");
+                UI_NotEnoughtMoney.Instance.ShowNotificationWindow(1.05f);
             }
         }
     }

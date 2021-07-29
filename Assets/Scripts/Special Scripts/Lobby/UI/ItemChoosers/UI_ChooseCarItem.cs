@@ -10,12 +10,8 @@ namespace NWR.Lobby
         [ReadOnly, SerializeField] public Car carToChoose;
         public void ChooseThisItem()
         {
-            if (carToChoose == LobbyManager.Instance.playerCar)
-            {
-                if (ShopSystem.Instance.previewModeActive)
-                    ShopSystem.Instance.ClosePreviewMode();
-                return;
-            }
+            if (ShopSystem.Instance.previewModeActive)
+                ShopSystem.Instance.ClosePreviewMode();
 
 
             LobbyManager.Instance.UpdatePlayerCar(carToChoose);
