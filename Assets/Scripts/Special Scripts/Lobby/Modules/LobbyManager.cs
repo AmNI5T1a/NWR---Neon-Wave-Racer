@@ -22,18 +22,28 @@ namespace NWR.Lobby
             else
                 Destroy(this.gameObject);
 
-            Assets.OnSendPlayerSelectedItems += SetAndInstanciatePlayerCar;
+            Assets.OnSendPlayerSelectedItems += SetAndInstanciatePlayerCarAtStart;
         }
 
-        public void SetAndInstanciatePlayerCar(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
+        public void SetAndInstanciatePlayerCarAtStart(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
         {
             playerCarGameObject = Instantiate(e.playerCar.item.GetCarAsGameObject(), playerCarPosition, Quaternion.identity);
             playerCar = e.playerCar.item;
         }
 
+        public void UpdatePlayerCar(Car newCar)
+        {
+            if (playerCarGameObject != null)
+                Destroy(playerCarGameObject);
+
+            playerCar = newCar;
+            playerCarGameObject = Instantiate(playerCar.GetCarAsGameObject(), playerCarPosition, Quaternion.identity);
+            playerCarGameObject.SetActive(true);
+        }
+
         private void OnDestroy()
         {
-            Assets.OnSendPlayerSelectedItems -= SetAndInstanciatePlayerCar;
+            Assets.OnSendPlayerSelectedItems -= SetAndInstanciatePlayerCarAtStart;
         }
     }
 }

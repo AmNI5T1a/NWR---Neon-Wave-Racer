@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using NWR.Lobby;
@@ -8,6 +9,7 @@ namespace NWR.Modules
     public class Assets : MonoBehaviour
     {
         public static Assets Instance;
+
 
 
         [System.Serializable]
@@ -20,8 +22,6 @@ namespace NWR.Modules
         [SerializeField] public List<ItemAndStats<Road>> roads_list;
         [SerializeField] public List<ItemAndStats<GameMode>> gameModes_list;
 
-
-
         public static event EventHandler<OnSendPlayerSelectedItemsEventArgs> OnSendPlayerSelectedItems;
         public class OnSendPlayerSelectedItemsEventArgs : EventArgs
         {
@@ -31,20 +31,26 @@ namespace NWR.Modules
         }
 
 
-
-        public static event EventHandler<OnSendItemsEventArgs> OnSendItems;
-        public class OnSendItemsEventArgs : EventArgs
+        public static event EventHandler<OnSendAssetsEventArgs> OnSendAssets;
+        public class OnSendAssetsEventArgs : EventArgs
         {
             public List<ItemAndStats<Car>> cars_List;
             public List<ItemAndStats<Road>> roads_List;
             public List<ItemAndStats<GameMode>> gameModes_List;
+
+            public OnSendAssetsEventArgs(List<ItemAndStats<Car>> cars_List, List<ItemAndStats<Road>> roads_List, List<ItemAndStats<GameMode>> gameModes_List)
+            {
+                this.cars_List = cars_List;
+                this.roads_List = roads_List;
+                this.gameModes_List = gameModes_List;
+            }
         }
 
         void Awake()
         {
             Player.OnSendBoughtItemIDs += LoadPurchasedItems;
 
-            Player.OnSendPlayerSelectedItemIDs += FindAndSendItemsInformation;
+            Player.OnSendPlayerSelectedItemIDs += FindFromAssetsAndSendItems;
         }
 
         void Start()
@@ -54,12 +60,6 @@ namespace NWR.Modules
             else
                 Destroy(this.gameObject);
 
-            OnSendItems?.Invoke(this, new OnSendItemsEventArgs
-            {
-                cars_List = this.cars_list,
-                roads_List = this.roads_list,
-                gameModes_List = this.gameModes_list
-            });
         }
 
         private void LoadPurchasedItems(object sender, Player.ID_ListsOfPurchasedItems lists)
@@ -73,36 +73,18 @@ namespace NWR.Modules
             {
                 item.isBought = lists.boughtRoads.Contains(item.item.GetID());
             }
+
+            OnSendAssetsEventArgs assets = new OnSendAssetsEventArgs(cars_list, roads_list, gameModes_list);
+            OnSendAssets?.Invoke(this, assets);
         }
 
-        private void FindAndSendItemsInformation(object sender, Player.PlayerSelectedItemIDsEventArgs e)
+        private void FindFromAssetsAndSendItems(object sender, Player.PlayerSelectedItemIDsEventArgs e)
         {
             OnSendPlayerSelectedItemsEventArgs playerItems = new OnSendPlayerSelectedItemsEventArgs();
 
-            foreach (ItemAndStats<Car> car in cars_list)
-            {
-                if (car.item.GetID() == e.car_ID)
-                {
-                    playerItems.playerCar = car;
-                }
-            }
-
-
-            foreach (ItemAndStats<Road> road in roads_list)
-            {
-                if (road.item.GetID() == e.road_ID)
-                {
-                    playerItems.playerRoad = road;
-                }
-            }
-
-            foreach (ItemAndStats<GameMode> gm in gameModes_list)
-            {
-                if (gm.item.GetID() == e.gameMode_ID)
-                {
-                    playerItems.playerGameMode = gm;
-                }
-            }
+            playerItems.playerCar = cars_list.First(x => x.item.GetID() == e.car_ID);
+            playerItems.playerRoad = roads_list.First(x => x.item.GetID() == e.road_ID);
+            playerItems.playerGameMode = gameModes_list.Find(x => x.item.GetID() == e.gameMode_ID);
 
             OnSendPlayerSelectedItems?.Invoke(this, playerItems);
         }

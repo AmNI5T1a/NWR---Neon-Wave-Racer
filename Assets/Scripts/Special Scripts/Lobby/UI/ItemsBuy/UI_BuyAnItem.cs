@@ -13,7 +13,7 @@ namespace NWR.Lobby
             btn.onClick.AddListener(() => Buy(this.gameObject.GetComponent<I_UI_ItemBuy>()));
         }
 
-        private void Buy(I_UI_ItemBuy itemBuyer)
+        public void Buy(I_UI_ItemBuy itemBuyer)
         {
             itemBuyer.BuyItem();
         }

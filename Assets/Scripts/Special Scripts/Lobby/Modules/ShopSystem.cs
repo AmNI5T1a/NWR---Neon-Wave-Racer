@@ -1,5 +1,6 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using NWR.Modules;
 
 namespace NWR.Lobby
@@ -24,12 +25,8 @@ namespace NWR.Lobby
             previewModeActive = true;
         }
 
-
-
         public void ClosePreviewMode()
         {
-            Debug.Log("Closing preview mode");
-
             Destroy(carForPreview);
             Destroy(preview_UI_Component);
             Destroy(buyButton_UI_Component);

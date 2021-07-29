@@ -6,39 +6,39 @@ using System.Linq;
 namespace NWR.Modules
 {
     [CreateAssetMenu(fileName = "Car", menuName = "NWR/Items/Car")]
-    public class Car : Item, IBuyItem
+    public class Car : Item
     {
         [SerializeField] private uint price;
         [SerializeField] private string description;
         [SerializeField] private GameObject prefab;
 
+        private UI_BuyCar initializator;
 
-        public GameObject GetCarAsGameObject() => prefab;
         public uint GetPrice() => price;
-        public void Buy()
+        public GameObject GetCarAsGameObject() => prefab;
+        public void Buy(UI_BuyCar initializator)
         {
-            if (Player.Instance.money >= this.GetPrice())
+            this.initializator = initializator;
+
+            if (Player.Instance.money >= price)
             {
-                // TODO: add to player bought cars list
-                // TODO: check box to true in assets cars_list
-                // TODO: update UI for this item
-                // TODO: save system
-                // TODO: set this car as choosen
-                // TODO: close UI
-                // TODO: delete preview and buy button
+                Player.Instance.money -= price;
 
                 Player.Instance.listOfPurchasedItemIDs.boughtCars.Add(this.GetID());
-                Assets.ItemAndStats<Car> car = Assets.Instance.cars_list.FirstOrDefault(x => this.ID == GetID());
-                Debug.Log("car with name: " + car.item.name + "isBought was sucessuly set as true");
+
+                Assets.ItemAndStats<Car> car = Assets.Instance.cars_list.First(x => x.item.GetID() == this.GetID());
                 car.isBought = true;
 
+                Player.Instance.ChangeSelectedCar(this.GetID());
 
-                //SaveSystem.Save();
+                initializator.creator.GetComponent<I_UI_ItemUpdater>().UpdateUIComponent<Car>(this);
+
+                ShopSystem.Instance.ClosePreviewMode();
+                Player.Instance.UpdatePlayerStats();
             }
             else
             {
-                Debug.LogWarning("Car: not enought money");
-                Debug.LogWarning("Notification window: Not implemented exception");
+                UI_NotEnoughtMoney.Instance.ShowNotificationWindow(1.05f);
             }
         }
     }
