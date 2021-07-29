@@ -10,6 +10,7 @@ namespace NWR.Lobby
     {
         [Header("Info box: ")]
         [ReadOnly, SerializeField] public Car carToBuy;
+        [ReadOnly, SerializeField] public UI_CreateCarItem creator;
         public void BuyItem()
         {
             if (ShopSystem.Instance.previewModeActive)
@@ -24,7 +25,7 @@ namespace NWR.Lobby
 
             GameObject buyButton_UI_Component = Instantiate(Resources.Load("Buy button"), this.gameObject.transform.root) as GameObject;
             buyButton_UI_Component.gameObject.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = carToBuy.GetPrice().ToString();
-            buyButton_UI_Component.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { carToBuy.Buy(); });
+            buyButton_UI_Component.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { carToBuy.Buy(this); });
 
             ShopSystem.Instance.ShopSystemConstructor(carForPreview: ref carForPreview,
                                                     preview_UI_Component: ref previewMode_UI_Component,

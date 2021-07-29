@@ -12,18 +12,13 @@ namespace NWR.Modules
         [SerializeField] private string description;
         [SerializeField] private GameObject prefab;
 
-
+        private UI_BuyCar initializator;
 
         public uint GetPrice() => price;
         public GameObject GetCarAsGameObject() => prefab;
-        public void Buy()
+        public void Buy(UI_BuyCar initializator)
         {
-            // TODO: -money to player
-            // TODO: Add car to bought IDs list
-            // TODO: Close preview mode
-            // TODO: update UI
-            // TODO: set this as selected
-            // TODO: save game
+            this.initializator = initializator;
 
             if (Player.Instance.money >= price)
             {
@@ -35,6 +30,8 @@ namespace NWR.Modules
                 car.isBought = true;
 
                 Player.Instance.ChangeSelectedCar(this.GetID());
+
+                initializator.creator.GetComponent<I_UI_ItemUpdater>().UpdateUIComponent<Car>(this);
 
                 ShopSystem.Instance.ClosePreviewMode();
                 Player.Instance.UpdatePlayerStats();

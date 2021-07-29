@@ -6,9 +6,9 @@ using TMPro;
 
 namespace NWR.Lobby
 {
-    class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator
+    public class UI_CreateCarItem : MonoBehaviour, I_UI_ItemCreator, I_UI_ItemUpdater
     {
-        public static Dictionary<Car, GameObject> car_ui_gmComponents = new Dictionary<Car, GameObject>();
+        public Dictionary<Car, GameObject> car_ui_gmComponents = new Dictionary<Car, GameObject>();
         public void CreateItemsAtStart(Assets.OnSendAssetsEventArgs assets)
         {
             foreach (Assets.ItemAndStats<Car> car in assets.cars_List)
@@ -47,8 +47,23 @@ namespace NWR.Lobby
         {
             UI_BuyCar ui_carItemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyCar>();
             ui_carItemBuyer.carToBuy = car;
+            ui_carItemBuyer.creator = this;
 
             UI_BuyAnItem ui_itemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyAnItem>();
+        }
+        public void UpdateUIComponent<T>(T item) where T : Item
+        {
+            GameObject carGameObjectToUpdate = car_ui_gmComponents.First(x => x.Key.GetID() == item.GetID()).Value;
+            Car carToUpdate = car_ui_gmComponents.First(x => x.Key.GetID() == item.GetID()).Key;
+
+            car_ui_gmComponents.Remove(carToUpdate);
+            Destroy(carGameObjectToUpdate);
+
+            Assets.ItemAndStats<Car> itemToUpdate = new Assets.ItemAndStats<Car>();
+            itemToUpdate.item = carToUpdate;
+            itemToUpdate.isBought = true;
+
+            CreateUIComponent(itemToUpdate);
         }
     }
 }
