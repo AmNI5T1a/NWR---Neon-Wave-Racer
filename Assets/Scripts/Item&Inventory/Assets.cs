@@ -22,8 +22,6 @@ namespace NWR.Modules
         [SerializeField] public List<ItemAndStats<Road>> roads_list;
         [SerializeField] public List<ItemAndStats<GameMode>> gameModes_list;
 
-
-
         public static event EventHandler<OnSendPlayerSelectedItemsEventArgs> OnSendPlayerSelectedItems;
         public class OnSendPlayerSelectedItemsEventArgs : EventArgs
         {

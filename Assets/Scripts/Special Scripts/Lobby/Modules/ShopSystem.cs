@@ -25,11 +25,6 @@ namespace NWR.Lobby
             previewModeActive = true;
         }
 
-        public void UpdateUIComponent<T>(T item) where T : Item
-        {
-
-        }
-
         public void ClosePreviewMode()
         {
             Destroy(carForPreview);
