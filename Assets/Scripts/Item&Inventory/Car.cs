@@ -38,7 +38,9 @@ namespace NWR.Modules
             }
             else
             {
-                UI_NotEnoughtMoney.Instance.ShowNotificationWindow(1.05f);
+                // ? Should I move this logic and call only 1 func
+                GameObject notificationWindow = Instantiate(Resources.Load("NotificationWindow (NotEnoughMoney)"), initializator.transform.root.transform) as GameObject;
+                notificationWindow.GetComponent<UI_NotEnoughtMoney>().ShowNotificationWindow(instance: ref notificationWindow);
             }
         }
     }

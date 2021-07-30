@@ -26,7 +26,7 @@ namespace NWR.Lobby
 
         public void ShowOrHideUIComponent()
         {
-            showHide_Animations = new ShowHideAnimations(instance: this.gameObject,
+            showHide_Animations = new ShowHideAnimations(gameObjectToAnimate: this.gameObject,
                                                         position_ON_Screen: position_ON_Screen,
                                                         position_OUT_ofScreen: position_OUT_ofScreen,
                                                         leap: leap);
