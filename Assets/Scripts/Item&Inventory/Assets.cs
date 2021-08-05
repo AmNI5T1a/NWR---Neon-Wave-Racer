@@ -22,6 +22,8 @@ namespace NWR.Modules
         [SerializeField] public List<ItemAndStats<Road>> roads_list;
         [SerializeField] public List<ItemAndStats<GameMode>> gameModes_list;
 
+
+
         public static event EventHandler<OnSendPlayerSelectedItemsEventArgs> OnSendPlayerSelectedItems;
         public class OnSendPlayerSelectedItemsEventArgs : EventArgs
         {
@@ -29,6 +31,7 @@ namespace NWR.Modules
             public ItemAndStats<Road> playerRoad;
             public ItemAndStats<GameMode> playerGameMode;
         }
+
 
 
         public static event EventHandler<OnSendAssetsEventArgs> OnSendAssets;
@@ -62,7 +65,7 @@ namespace NWR.Modules
 
         }
 
-        private void LoadPurchasedItems(object sender, Player.ID_ListsOfPurchasedItems lists)
+        private void LoadPurchasedItems(object sender, Player.ListOfIDs_ofPurchasedItems lists)
         {
             foreach (ItemAndStats<Car> item in cars_list)
             {

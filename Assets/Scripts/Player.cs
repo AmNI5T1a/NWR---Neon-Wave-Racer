@@ -15,17 +15,18 @@ namespace NWR.Modules
         public ushort selectedCarID;
         public ushort selectedRoadID;
         public ushort selectedGameModeID;
-        public ID_ListsOfPurchasedItems listOfPurchasedItemIDs;
+        public ListOfIDs_ofPurchasedItems listOfPurchasedItemIDs;
+        public PlayerSelectedItemIDsEventArgs listOfPlayerSelectedItemsIDs;
 
         public static event Action<uint, uint> OnSendPlayerStats = delegate { };
 
-        public static EventHandler<ID_ListsOfPurchasedItems> OnSendBoughtItemIDs;
-        public class ID_ListsOfPurchasedItems
+        public static EventHandler<ListOfIDs_ofPurchasedItems> OnSendBoughtItemIDs;
+        public class ListOfIDs_ofPurchasedItems
         {
             public List<int> boughtCars { get; set; }
             public List<int> boughtRoads { get; set; }
 
-            public ID_ListsOfPurchasedItems(List<int> car_IDs, List<int> road_IDs)
+            public ListOfIDs_ofPurchasedItems(List<int> car_IDs, List<int> road_IDs)
             {
                 this.boughtCars = car_IDs;
                 this.boughtRoads = road_IDs;
@@ -33,11 +34,18 @@ namespace NWR.Modules
         }
 
         public static EventHandler<PlayerSelectedItemIDsEventArgs> OnSendPlayerSelectedItemIDs;
-        public class PlayerSelectedItemIDsEventArgs : EventArgs
+        public class PlayerSelectedItemIDsEventArgs
         {
             public ushort car_ID;
             public ushort road_ID;
             public ushort gameMode_ID;
+
+            public PlayerSelectedItemIDsEventArgs(ushort car_ID, ushort road_ID, ushort gameMode_ID)
+            {
+                this.car_ID = car_ID;
+                this.road_ID = road_ID;
+                this.gameMode_ID = gameMode_ID;
+            }
         }
 
 
@@ -59,15 +67,7 @@ namespace NWR.Modules
             LoadPlayerDataOnStart();
 
             OnSendBoughtItemIDs?.Invoke(this, listOfPurchasedItemIDs);
-
-            OnSendPlayerSelectedItemIDs?.Invoke(this, new PlayerSelectedItemIDsEventArgs
-            {
-                car_ID = selectedCarID,
-                road_ID = selectedRoadID,
-                gameMode_ID = selectedGameModeID
-
-            });
-
+            OnSendPlayerSelectedItemIDs?.Invoke(this, listOfPlayerSelectedItemsIDs);
             UpdatePlayerStats();
         }
 
@@ -82,20 +82,22 @@ namespace NWR.Modules
             selectedRoadID = loadedData.selectedRoadID;
             selectedGameModeID = loadedData.selectedGameModeID;
 
-            listOfPurchasedItemIDs = new ID_ListsOfPurchasedItems(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
+            listOfPurchasedItemIDs = new ListOfIDs_ofPurchasedItems(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
+            listOfPlayerSelectedItemsIDs = new PlayerSelectedItemIDsEventArgs(selectedCarID, selectedRoadID, selectedGameModeID);
         }
+
 
 
         public void ChangeSelectedCar(ushort newCarID)
         {
-            this.selectedCarID = newCarID;
+            selectedCarID = newCarID;
             Car newCar = Assets.Instance.cars_list.First(x => x.item.GetID() == newCarID).item;
             LobbyManager.Instance.UpdatePlayerCar(newCar);
         }
 
         public void UpdatePlayerStats()
         {
-            OnSendPlayerStats(Instance.money, Instance.donation);
+            OnSendPlayerStats?.Invoke(money, donation);
         }
     }
 }
