@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NWR.UIGradient
+namespace NWR.Modules.UIGradient
 {
     [AddComponentMenu("UI/Effects/Gradient")]
     public class UIGradient : BaseMeshEffect
