@@ -19,6 +19,11 @@ namespace NWR.Modules
 
                 return _instance;
             }
+            set
+            {
+                if (_instance == null)
+                    _instance = value;
+            }
         }
     }
 }

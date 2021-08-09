@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using NWR.Lobby;
 using UnityEngine;
+using System.Collections;
 
 namespace NWR.Modules
 {
@@ -10,37 +11,44 @@ namespace NWR.Modules
     {
         public static Player Instance { get; private set; }
 
-        public uint money;
-        public uint donation;
-        public ushort selectedCarID;
-        public ushort selectedRoadID;
-        public ushort selectedGameModeID;
-        public ListOfIDs_ofPurchasedItems listOfPurchasedItemIDs;
-        public PlayerSelectedItemIDsEventArgs listOfPlayerSelectedItemsIDs;
+        [SerializeField] public uint money;
+        [SerializeField] public uint donation;
+        [SerializeField] public ushort selectedCarID;
+        [SerializeField] public ushort selectedRoadID;
+        [SerializeField] public ushort selectedGameModeID;
 
-        public static event Action<uint, uint> OnSendPlayerStats = delegate { };
+        [SerializeField] public PlayerSelectedItemIDs listOfPlayerSelectedItemsIDs;
+        [SerializeField] public PlayerBoughtedItemsIDs listOfPurchasedItemIDs;
 
-        public static EventHandler<ListOfIDs_ofPurchasedItems> OnSendBoughtItemIDs;
-        public class ListOfIDs_ofPurchasedItems
+        [Serializable]
+        public class PlayerBoughtedItemsIDs
         {
-            public List<int> boughtCars { get; set; }
-            public List<int> boughtRoads { get; set; }
+            [SerializeField, ReadOnly] public List<int> boughtCars;
+            [SerializeField, ReadOnly] public List<int> boughtRoads;
 
-            public ListOfIDs_ofPurchasedItems(List<int> car_IDs, List<int> road_IDs)
+            public PlayerBoughtedItemsIDs(List<int> car_IDs, List<int> road_IDs)
             {
                 this.boughtCars = car_IDs;
                 this.boughtRoads = road_IDs;
             }
+
+            public void AddNewBoughtCar(int boughtCarID)
+            {
+                boughtCars.Add(boughtCarID);
+            }
+            public void AddNewBoughtRoad(int boughtRoadID)
+            {
+                boughtRoads.Add(boughtRoadID);
+            }
         }
 
-        public static EventHandler<PlayerSelectedItemIDsEventArgs> OnSendPlayerSelectedItemIDs;
-        public class PlayerSelectedItemIDsEventArgs
+        public class PlayerSelectedItemIDs
         {
             public ushort car_ID;
             public ushort road_ID;
             public ushort gameMode_ID;
 
-            public PlayerSelectedItemIDsEventArgs(ushort car_ID, ushort road_ID, ushort gameMode_ID)
+            public PlayerSelectedItemIDs(ushort car_ID, ushort road_ID, ushort gameMode_ID)
             {
                 this.car_ID = car_ID;
                 this.road_ID = road_ID;
@@ -48,27 +56,21 @@ namespace NWR.Modules
             }
         }
 
-
-
-        void Awake()
+        private void Awake()
         {
             if (Instance == null)
-            {
                 Instance = this;
-            }
             else
-            {
                 Destroy(this.gameObject);
-            }
         }
 
         void Start()
         {
             LoadPlayerDataOnStart();
 
-            OnSendBoughtItemIDs?.Invoke(this, listOfPurchasedItemIDs);
-            OnSendPlayerSelectedItemIDs?.Invoke(this, listOfPlayerSelectedItemsIDs);
-            UpdatePlayerStats();
+            Assets.Instance.LoadPurchasedItems(in listOfPurchasedItemIDs);
+            Assets.Instance.FindFromAssetsAndSendItems(listOfPlayerSelectedItemsIDs);
+            UpdateUI_PlayerStats();
         }
 
 
@@ -82,8 +84,8 @@ namespace NWR.Modules
             selectedRoadID = loadedData.selectedRoadID;
             selectedGameModeID = loadedData.selectedGameModeID;
 
-            listOfPurchasedItemIDs = new ListOfIDs_ofPurchasedItems(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
-            listOfPlayerSelectedItemsIDs = new PlayerSelectedItemIDsEventArgs(selectedCarID, selectedRoadID, selectedGameModeID);
+            listOfPurchasedItemIDs = new PlayerBoughtedItemsIDs(new List<int>(loadedData.ID_OfAllPurchasedCars), new List<int>(loadedData.ID_OfAllPurchasedRoads));
+            listOfPlayerSelectedItemsIDs = new PlayerSelectedItemIDs(selectedCarID, selectedRoadID, selectedGameModeID);
         }
 
 
@@ -95,9 +97,9 @@ namespace NWR.Modules
             LobbyManager.Instance.UpdatePlayerCar(newCar);
         }
 
-        public void UpdatePlayerStats()
+        public void UpdateUI_PlayerStats()
         {
-            OnSendPlayerStats?.Invoke(money, donation);
+            UI_Manager.Instance.UpdateUI_PlayerStats(money, donation);
         }
     }
 }

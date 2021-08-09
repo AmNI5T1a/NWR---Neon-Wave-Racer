@@ -2,15 +2,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using NWR.Lobby;
 
 namespace NWR.Modules
 {
     public class Assets : MonoBehaviour
     {
-        public static Assets Instance;
-
-
+        public static Assets Instance { get; private set; }
 
         [System.Serializable]
         public class ItemAndStats<T> where T : Item
@@ -18,7 +15,7 @@ namespace NWR.Modules
             [SerializeField] public T item;
             [SerializeField] public bool isBought;
         }
-        [SerializeField] public List<ItemAndStats<Car>> cars_list;
+        [SerializeField] public List<ItemAndStats<Car>> cars_list = new List<ItemAndStats<Car>>();
         [SerializeField] public List<ItemAndStats<Road>> roads_list;
         [SerializeField] public List<ItemAndStats<GameMode>> gameModes_list;
 
@@ -49,23 +46,15 @@ namespace NWR.Modules
             }
         }
 
-        void Awake()
-        {
-            Player.OnSendBoughtItemIDs += LoadPurchasedItems;
 
-            Player.OnSendPlayerSelectedItemIDs += FindFromAssetsAndSendItems;
-        }
-
-        void Start()
+        private void Awake()
         {
             if (Instance == null)
                 Instance = this;
             else
                 Destroy(this.gameObject);
-
         }
-
-        private void LoadPurchasedItems(object sender, Player.ListOfIDs_ofPurchasedItems lists)
+        public void LoadPurchasedItems(in Player.PlayerBoughtedItemsIDs lists)
         {
             foreach (ItemAndStats<Car> item in cars_list)
             {
@@ -81,7 +70,7 @@ namespace NWR.Modules
             OnSendAssets?.Invoke(this, assets);
         }
 
-        private void FindFromAssetsAndSendItems(object sender, Player.PlayerSelectedItemIDsEventArgs e)
+        public void FindFromAssetsAndSendItems(Player.PlayerSelectedItemIDs e)
         {
             OnSendPlayerSelectedItemsEventArgs playerItems = new OnSendPlayerSelectedItemsEventArgs();
 
