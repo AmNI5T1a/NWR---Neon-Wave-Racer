@@ -11,8 +11,8 @@ namespace NWR.MainMenu
         public void HideThisAndShowGO_WithID_InParams(int transfromPositionObjectToShow)
         {
             StartCoroutine(hideAnimation.HideAnimation(this.gameObject));
-            StartCoroutine(appearAnimation.AppearAnimation(this.gameObject.transform.parent.GetChild(transfromPositionObjectToShow)?.gameObject) ??
-                                                        appearAnimation.AppearAnimation(this.gameObject.transform.parent.GetChild(0)?.gameObject));
+            StartCoroutine(appearAnimation.AppearAnimation(this.gameObject.transform.root.GetChild(transfromPositionObjectToShow)?.gameObject) ??
+                                                        appearAnimation.AppearAnimation(this.gameObject.transform.root.GetChild(0)?.gameObject));
         }
 
         public void Show(int transformPositionObjectToShow)
