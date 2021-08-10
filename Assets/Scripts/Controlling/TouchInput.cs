@@ -14,14 +14,15 @@ namespace NWR.Modules
 
         }
 
-        public override void Start()
+        public void CreateTouchUIForDriving()
         {
-            inputDescription = "Touch Input";
-
             if (touchInputCanvas == null)
                 touchInputCanvas = Instantiate(Resources.Load("Touch Input Canvas")) as GameObject;
         }
-
+        public override void Start()
+        {
+            inputDescription = "Touch Input";
+        }
         public override void Stop()
         {
             Destroy(touchInputCanvas);
