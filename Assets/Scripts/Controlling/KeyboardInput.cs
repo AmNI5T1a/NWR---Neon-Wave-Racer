@@ -63,12 +63,12 @@ namespace NWR.Modules
 
         public override void Start()
         {
-            Debug.Log("Switched to Keyboard Input");
+            inputDescription = "Keyboard Input";
         }
 
         public override void Stop()
         {
-            Debug.Log("Turning off Keyboard Input");
+
         }
     }
 }

@@ -40,6 +40,7 @@ namespace NWR.Test
             {
                 readyToChangeLayout = false;
                 InputManager.Instance.SwitchInputLayout<KeyboardInput>();
+                Debug.LogWarning("Switching to keyboard");
                 yield return new WaitForSeconds(timeOutBeforeSwitch);
                 readyToChangeLayout = true;
             }
@@ -50,14 +51,10 @@ namespace NWR.Test
             {
                 readyToChangeLayout = false;
                 InputManager.Instance.SwitchInputLayout<TouchInput>();
+                Debug.LogWarning("Switching to touch");
                 yield return new WaitForSeconds(timeOutBeforeSwitch);
                 readyToChangeLayout = true;
             }
-        }
-
-        public void TESTFUNCTION()
-        {
-            Debug.Log("Test fucntion working great");
         }
     }
 }

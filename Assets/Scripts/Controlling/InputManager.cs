@@ -20,6 +20,8 @@ namespace NWR.Modules
         private void Start()
         {
             _currentInputLayout = this.gameObject.AddComponent<KeyboardInput>();
+
+            DontDestroyOnLoad(this.gameObject);
         }
 
         private void Update()

@@ -18,13 +18,16 @@ namespace NWR.MainMenu
         {
             _sequence = DOTween.Sequence();
             RectTransform objRectTransform = obj.GetComponent<RectTransform>();
-            obj.GetComponent<CanvasGroup>().interactable = false;
+            CanvasGroup objCanvasGroupComponent = obj.GetComponent<CanvasGroup>();
+            if (objCanvasGroupComponent != null)
+                objCanvasGroupComponent.interactable = false;
 
             _sequence.Append(objRectTransform.DOAnchorPos(positionOnScreenForMenu - new Vector2(40f, 0f), 0.8f));
             _sequence.Append(objRectTransform.DOAnchorPos(positionOnScreenForMenu, 0.25f));
             yield return new WaitForSeconds(1.05f);
 
-            obj.GetComponent<CanvasGroup>().interactable = true;
+            if (objCanvasGroupComponent != null)
+                objCanvasGroupComponent.interactable = true;
             _sequence.AppendCallback(() => { KillSequence(); });
         }
 
@@ -33,13 +36,16 @@ namespace NWR.MainMenu
         {
             _sequence = DOTween.Sequence();
             RectTransform objRectTransform = obj.GetComponent<RectTransform>();
-            obj.GetComponent<CanvasGroup>().interactable = false;
+            CanvasGroup objCanvasGroupComponent = obj.GetComponent<CanvasGroup>();
+            if (objCanvasGroupComponent != null)
+                objCanvasGroupComponent.interactable = false;
 
             _sequence.Append(objRectTransform.DOAnchorPos(positionOnScreenForMenu - new Vector2(40f, 0f), 0.25f));
             _sequence.Append(objRectTransform.DOAnchorPos(positionOutOfScreenForMenu, 0.8f));
             yield return new WaitForSeconds(1.05f);
 
-            obj.GetComponent<CanvasGroup>().interactable = true;
+            if (objCanvasGroupComponent != null)
+                objCanvasGroupComponent.interactable = false;
             _sequence.AppendCallback(() => { KillSequence(); });
         }
 

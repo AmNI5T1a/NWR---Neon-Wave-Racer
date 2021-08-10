@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7677813377570195318}
   - component: {fileID: 8098375952330149138}
   - component: {fileID: 770088186017479412}
+  - component: {fileID: 550086328824702899}
   m_Layer: 5
   m_Name: MoveLeft Button
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &550086328824702899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250812512447261379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4b16d61e9c1a44a852abaeb46f0f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4312632834176245071
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +248,7 @@ GameObject:
   - component: {fileID: 904312817940176562}
   - component: {fileID: 7082234310862048396}
   - component: {fileID: 8178507377261520947}
+  - component: {fileID: 4538211367783270098}
   m_Layer: 5
   m_Name: MoveRight Button
   m_TagString: Untagged
@@ -343,6 +357,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4538211367783270098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814087605574150919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb829e62ee889f8489ece34ded9973ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7873211316039074482
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +381,7 @@ GameObject:
   - component: {fileID: 4959832811055680083}
   - component: {fileID: 1121350906258813207}
   - component: {fileID: 2793874061894241457}
+  - component: {fileID: 4055818345241356504}
   m_Layer: 5
   m_Name: MoveForward Button
   m_TagString: Untagged
@@ -463,6 +490,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4055818345241356504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7873211316039074482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4ce2b78663a334c885a27473c87c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8045975087071381917
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +514,7 @@ GameObject:
   - component: {fileID: 8876650152009291794}
   - component: {fileID: 8425943159430484947}
   - component: {fileID: 5270413909417376376}
+  - component: {fileID: 1264831096791016637}
   m_Layer: 5
   m_Name: MoveBack Button
   m_TagString: Untagged
@@ -583,3 +623,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1264831096791016637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045975087071381917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1d92fb57e8eb243bdf391c933542c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
