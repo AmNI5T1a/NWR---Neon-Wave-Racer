@@ -34,7 +34,7 @@ namespace NWR.Modules
                 initializator.creator.GetComponent<I_UI_ItemUpdater>().UpdateUIComponent<Car>(this);
 
                 ShopSystem.Instance.ClosePreviewMode();
-                Player.Instance.UpdatePlayerStats();
+                Player.Instance.UpdateUI_PlayerStats();
             }
             else
             {
