@@ -16,4 +16,4 @@ MonoBehaviour:
   Denomination: Delorian 80s
   price: 9900
   description: Old American car
-  prefab: {fileID: 4873773422801319883, guid: 1e55d108e12540d449de38918684798a, type: 3}
+  prefab: {fileID: 7432602072829252592, guid: 7e4d7b11174e738419ea59e16bce5065, type: 3}

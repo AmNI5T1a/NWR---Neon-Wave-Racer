@@ -16,4 +16,4 @@ MonoBehaviour:
   Denomination: Vort 7f
   price: 24000
   description: Rally car, very good steering
-  prefab: {fileID: 1174235100830971941, guid: 06b09d859160db34b8175291cd806376, type: 3}
+  prefab: {fileID: 4432359948735468479, guid: 06b09d859160db34b8175291cd806376, type: 3}
