@@ -2591,7 +2591,7 @@ GameObject:
   - component: {fileID: 7871113221647167526}
   m_Layer: 0
   m_Name: Loktra Essens
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2635,7 +2635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5001476948807846368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7616449ca8f1fd478aba066d3c91f11, type: 3}
   m_Name: 

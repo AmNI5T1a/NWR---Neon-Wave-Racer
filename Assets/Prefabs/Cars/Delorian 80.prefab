@@ -3940,7 +3940,7 @@ GameObject:
   - component: {fileID: 5726035797162207798}
   m_Layer: 0
   m_Name: Delorian 80
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3988,7 +3988,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7432602072829252592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7616449ca8f1fd478aba066d3c91f11, type: 3}
   m_Name: 

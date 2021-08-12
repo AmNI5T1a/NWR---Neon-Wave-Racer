@@ -8,6 +8,11 @@ public class CAMERA_FOLLOW_BIRDMODE : MonoBehaviour
     [SerializeField] private Transform _carTranform;
     [SerializeField, Range(-20f, 20f)] private float _offset;
 
+    void Start()
+    {
+        _carTranform = GameObject.FindGameObjectWithTag("Car").gameObject.transform;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
