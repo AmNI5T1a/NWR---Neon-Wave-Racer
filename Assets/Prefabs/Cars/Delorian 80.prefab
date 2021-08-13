@@ -1847,7 +1847,7 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 3
+    m_ExtremumValue: 5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
@@ -1989,7 +1989,7 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 3
+    m_ExtremumValue: 5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
@@ -2050,7 +2050,7 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 3
+    m_ExtremumValue: 5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
@@ -2453,10 +2453,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3604288160043469652}
-  - component: {fileID: 3604288160043469642}
   m_Layer: 0
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2476,19 +2475,6 @@ Transform:
   m_Father: {fileID: 7813244629983267146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!65 &3604288160043469642
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3604288160043469653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.676412, y: 1.1795857, z: 1.8196511}
-  m_Center: {x: -0.15872622, y: 0.8210498, z: -0.0040181875}
 --- !u!1 &3604288161226998215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,7 +2531,7 @@ WheelCollider:
     m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
-    m_ExtremumValue: 3
+    m_ExtremumValue: 5
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
@@ -3938,6 +3924,7 @@ GameObject:
   - component: {fileID: 7813244629983267146}
   - component: {fileID: 7432602072829252591}
   - component: {fileID: 5726035797162207798}
+  - component: {fileID: 7560844362075866822}
   m_Layer: 0
   m_Name: Delorian 80
   m_TagString: Car
@@ -3988,7 +3975,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7432602072829252592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7616449ca8f1fd478aba066d3c91f11, type: 3}
   m_Name: 
@@ -4005,9 +3992,9 @@ MonoBehaviour:
     RearRightWheel: {fileID: 2471694433573657164}
   _horizontalInputSteeringSpeed: 0.15
   steeringSpeed: 6.5
-  motorTorque: 340
-  brakeTorque: 2250
-  maxSpeed: 4
+  motorTorque: 900
+  brakeTorque: 4000
+  maxSpeed: 150
   minSpeed: 0
   _gearSystem:
     gears:
@@ -4025,6 +4012,19 @@ MonoBehaviour:
   _currentRPM: 0
   _shiftDownCooldownRemainingTime: 0
   _shiftDownOnCooldown: 0
+--- !u!65 &7560844362075866822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432602072829252592}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.676412, y: 1.1795857, z: 1.8196511}
+  m_Center: {x: -0.15872622, y: 0.8210498, z: -0.0040181875}
 --- !u!1 &7528195292035121683
 GameObject:
   m_ObjectHideFlags: 0
