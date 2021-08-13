@@ -23,7 +23,7 @@ namespace NWR.Lobby
             UI_ChooseCarItem ui_carItemChooser = UI_Component_instance.gameObject.AddComponent<UI_ChooseCarItem>();
             ui_carItemChooser.carToChoose = car;
 
-            UI_ItemChooser ui_itemChooser = UI_Component_instance.gameObject.AddComponent<UI_ItemChooser>();
+            UI_Component_instance.gameObject.AddComponent<UI_ItemChooser>();
         }
 
         private void CreatePurchasableItem(Car car, ref GameObject UI_Component_instance)
@@ -32,7 +32,7 @@ namespace NWR.Lobby
             ui_carItemBuyer.carToBuy = car;
             ui_carItemBuyer.creator = this;
 
-            UI_BuyAnItem ui_itemBuyer = UI_Component_instance.gameObject.AddComponent<UI_BuyAnItem>();
+            UI_Component_instance.gameObject.AddComponent<UI_BuyAnItem>();
         }
 
 
