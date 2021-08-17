@@ -3,9 +3,14 @@ using NWR.Modules;
 
 namespace NWR.Lobby
 {
-    public class UI_ChooseGameModeItem : MonoBehaviour
+    public class UI_ChooseGameModeItem : MonoBehaviour, I_UI_ItemChooser
     {
         [Header("Info:")]
         [ReadOnly, SerializeField] public GameMode gameModeToChoose;
+
+        public void ChooseThisItem()
+        {
+            Debug.Log("Choosing items with name :" + gameModeToChoose.GetName());
+        }
     }
 }
