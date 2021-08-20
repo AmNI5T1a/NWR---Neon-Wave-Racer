@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef69785401b36644886a5095ee301c8, type: 3}
   m_Name: Bridge
   m_EditorClassIdentifier: 
-  ID: 2
+  ID: 0
   Denomination: Bridge
+  sceneToLoadID: 2
   price: 0
   description: default road
   image: {fileID: 21300000, guid: 107eaf282c3eb8247b59fde213770165, type: 3}
