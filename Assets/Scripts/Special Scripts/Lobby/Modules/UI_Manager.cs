@@ -9,6 +9,7 @@ namespace NWR.Lobby
         public static UI_Manager Instance { get; private set; }
 
         public static event Action<uint, uint> OnSendPlayerStats;
+        public static event Action<Car> OnUpdatePlayerSelectedCar;
 
         private void Awake()
         {
@@ -21,6 +22,11 @@ namespace NWR.Lobby
         public void UpdateUI_PlayerStats(uint money, uint donation)
         {
             OnSendPlayerStats?.Invoke(money, donation);
+        }
+
+        public void UpdatePlayerSelectedCar(Car car)
+        {
+            OnUpdatePlayerSelectedCar?.Invoke(car);
         }
     }
 }

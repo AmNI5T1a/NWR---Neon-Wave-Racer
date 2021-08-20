@@ -8,6 +8,6 @@ namespace NWR.Lobby
 {
     public abstract class UI_UpdateTextBoxInfo_Factory : MonoBehaviour
     {
-        public abstract void UpdateText(Assets.OnSendPlayerSelectedItemsEventArgs e);
+        public abstract void UpdateText(Assets.PlayerSelectedItemsEventArgs e);
     }
 }

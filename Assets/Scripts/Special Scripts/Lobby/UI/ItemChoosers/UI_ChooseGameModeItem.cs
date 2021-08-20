@@ -10,7 +10,7 @@ namespace NWR.Lobby
 
         public void ChooseThisItem()
         {
-            Debug.Log("Choosing items with name :" + gameModeToChoose.GetName());
+            Player.Instance.selectedGameModeID = gameModeToChoose.GetID();
         }
     }
 }

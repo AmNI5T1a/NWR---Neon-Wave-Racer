@@ -68,8 +68,8 @@ namespace NWR.Modules
         {
             LoadPlayerDataOnStart();
 
-            Assets.Instance.LoadPurchasedItems(in listOfPurchasedItemIDs);
-            Assets.Instance.FindFromAssetsAndSendItems(listOfPlayerSelectedItemsIDs);
+            Assets.Instance.LoadPurchasedItemsOnStart(in listOfPurchasedItemIDs);
+            Assets.Instance.FindFromAssetsAndSendItemsOnStart(listOfPlayerSelectedItemsIDs);
             UpdateUI_PlayerStats();
         }
 
@@ -95,8 +95,16 @@ namespace NWR.Modules
             selectedCarID = newCarID;
             Car newCar = Assets.Instance.cars_list.First(x => x.item.GetID() == newCarID).item;
             LobbyManager.Instance.UpdatePlayerCar(newCar);
+            UI_Manager.Instance.UpdatePlayerSelectedCar(newCar);
         }
+        public void ChangedSelectedGameMode(ushort newGameModeID)
+        {
 
+        }
+        public void ChangeSelectedRoad(ushort newRoadID)
+        {
+
+        }
         public void UpdateUI_PlayerStats()
         {
             UI_Manager.Instance.UpdateUI_PlayerStats(money, donation);

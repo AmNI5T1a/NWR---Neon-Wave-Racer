@@ -14,7 +14,7 @@ namespace NWR.Lobby
                 ShopSystem.Instance.ClosePreviewMode();
 
 
-            LobbyManager.Instance.UpdatePlayerCar(carToChoose);
+            Player.Instance.ChangeSelectedCar(carToChoose.GetID());
         }
     }
 }

@@ -6,7 +6,7 @@ namespace NWR.Lobby
 {
     public class UI_GameModeTextBoxUpdater : UI_UpdateTextBoxInfo_Factory
     {
-        public override void UpdateText(Assets.OnSendPlayerSelectedItemsEventArgs e)
+        public override void UpdateText(Assets.PlayerSelectedItemsEventArgs e)
         {
             this.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = e.playerGameMode.item.GetName();
         }

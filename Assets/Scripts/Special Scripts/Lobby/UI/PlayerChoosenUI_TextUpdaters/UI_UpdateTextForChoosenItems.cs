@@ -10,7 +10,7 @@ namespace NWR.Lobby
         {
             Assets.OnSendPlayerSelectedItems += SetNewText;
         }
-        public void SetNewText(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
+        public void SetNewText(object sender, Assets.PlayerSelectedItemsEventArgs e)
         {
             this.gameObject.GetComponent<UI_UpdateTextBoxInfo_Factory>().UpdateText(e);
         }

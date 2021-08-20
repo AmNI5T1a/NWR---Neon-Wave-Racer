@@ -25,7 +25,7 @@ namespace NWR.Lobby
             Assets.OnSendPlayerSelectedItems += SetAndInstanciatePlayerCarAtStart;
         }
 
-        public void SetAndInstanciatePlayerCarAtStart(object sender, Assets.OnSendPlayerSelectedItemsEventArgs e)
+        public void SetAndInstanciatePlayerCarAtStart(object sender, Assets.PlayerSelectedItemsEventArgs e)
         {
             playerCarGameObject = Instantiate(e.playerCar.item.GetCarAsGameObject(), playerCarPosition, Quaternion.identity);
             playerCar = e.playerCar.item;

@@ -21,8 +21,8 @@ namespace NWR.Modules
 
 
 
-        public static event EventHandler<OnSendPlayerSelectedItemsEventArgs> OnSendPlayerSelectedItems;
-        public class OnSendPlayerSelectedItemsEventArgs : EventArgs
+        public static event EventHandler<PlayerSelectedItemsEventArgs> OnSendPlayerSelectedItems;
+        public class PlayerSelectedItemsEventArgs : EventArgs
         {
             public ItemAndStats<Car> playerCar;
             public ItemAndStats<Road> playerRoad;
@@ -54,7 +54,24 @@ namespace NWR.Modules
             else
                 Destroy(this.gameObject);
         }
-        public void LoadPurchasedItems(in Player.PlayerBoughtedItemsIDs lists)
+
+        public void LoadPurchasedItemsOnStart(in Player.PlayerBoughtedItemsIDs listOfLoadedBoughtItems)
+        {
+            SetPurchasedItems(listOfLoadedBoughtItems);
+
+            OnSendAssetsEventArgs assets = new OnSendAssetsEventArgs(cars_list, roads_list, gameModes_list);
+            OnSendAssets?.Invoke(this, assets);
+        }
+
+        public void FindFromAssetsAndSendItemsOnStart(Player.PlayerSelectedItemIDs e)
+        {
+            PlayerSelectedItemsEventArgs items = FindPlayerSelectedItemsFromAssets(e);
+            OnSendPlayerSelectedItems?.Invoke(this, items);
+        }
+
+
+
+        public void SetPurchasedItems(in Player.PlayerBoughtedItemsIDs lists)
         {
             foreach (ItemAndStats<Car> item in cars_list)
             {
@@ -65,20 +82,17 @@ namespace NWR.Modules
             {
                 item.isBought = lists.boughtRoads.Contains(item.item.GetID());
             }
-
-            OnSendAssetsEventArgs assets = new OnSendAssetsEventArgs(cars_list, roads_list, gameModes_list);
-            OnSendAssets?.Invoke(this, assets);
         }
 
-        public void FindFromAssetsAndSendItems(Player.PlayerSelectedItemIDs e)
+        public PlayerSelectedItemsEventArgs FindPlayerSelectedItemsFromAssets(Player.PlayerSelectedItemIDs e)
         {
-            OnSendPlayerSelectedItemsEventArgs playerItems = new OnSendPlayerSelectedItemsEventArgs();
+            PlayerSelectedItemsEventArgs playerItems = new PlayerSelectedItemsEventArgs();
 
             playerItems.playerCar = cars_list.First(x => x.item.GetID() == e.car_ID);
             playerItems.playerRoad = roads_list.First(x => x.item.GetID() == e.road_ID);
             playerItems.playerGameMode = gameModes_list.Find(x => x.item.GetID() == e.gameMode_ID);
 
-            OnSendPlayerSelectedItems?.Invoke(this, playerItems);
+            return playerItems;
         }
     }
 }
