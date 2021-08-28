@@ -31,11 +31,6 @@ namespace NWR.PlayingMode
         private IEnumerator OneDirectionOfSpawningCars()
         {
             yield return null;
-
-            if (_currentNumberOfNPCCarsOnScene < _maxNCPCarsOnScene)
-            {
-                GameObject npcCar = Instantiate(Resources.Load("NPC_CAR_TEST"), )
-            }
         }
     }
 }
