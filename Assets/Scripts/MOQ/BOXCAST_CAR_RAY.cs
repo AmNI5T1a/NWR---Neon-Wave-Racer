@@ -6,7 +6,8 @@ public class BOXCAST_CAR_RAY : MonoBehaviour
     [Header("Stats:")]
     [SerializeField, Range(0, 1000)] private float _raycastLength;
     [SerializeField] private Vector3 _halfExtents;
-    [SerializeField] private float _npcBackSideBoxCastSize;
+    [SerializeField] private float _NonSpawningAreaSize;
+    [SerializeField] private float _NCPCarBackSideBoxCastSize;
 
 
     [Header("Info box:")]
@@ -15,18 +16,9 @@ public class BOXCAST_CAR_RAY : MonoBehaviour
 
     private void Start()
     {
-        if (_npcBackSideBoxCastSize <= 0)
-            _npcBackSideBoxCastSize = 0.2f;
+
     }
 
-
-    private void Update()
-    {
-        Debug.Log("transform.position: " + transform.position.ToString());
-        Debug.Log("transform.lossyScale/2: " + (transform.lossyScale / 2).ToString());
-        Debug.Log("transform.forward: " + transform.forward.ToString());
-        Debug.Log("transform.rotation: " + transform.rotation);
-    }
 
     private void OnDrawGizmos()
     {
@@ -37,24 +29,25 @@ public class BOXCAST_CAR_RAY : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawRay(transform.position, transform.forward * hit.distance);
-            Gizmos.DrawCube(this.transform.position + transform.forward * hit.distance, _halfExtents);
 
-            Gizmos.color = Color.black;
-            Gizmos.DrawWireCube(hit.transform.gameObject.GetComponent<BoxCollider>().bounds.center, hit.transform.gameObject.GetComponent<BoxCollider>().size);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(new Vector3(this.gameObject.transform.position.x, this.transform.position.y, hit.collider.bounds.center.z),
+                                new Vector3(hit.transform.gameObject.GetComponent<BoxCollider>().size.x,
+                                            hit.transform.gameObject.GetComponent<BoxCollider>().size.y,
+                                            _NonSpawningAreaSize));
 
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawCube(new Vector3(hit.transform.gameObject.GetComponent<BoxCollider>().bounds.center.x,
-                                        hit.transform.gameObject.GetComponent<BoxCollider>().bounds.center.y,
-                                        hit.transform.gameObject.GetComponent<BoxCollider>().bounds.center.z - (hit.transform.gameObject.GetComponent<BoxCollider>().bounds.size.z / 2)),
-                            new Vector3(hit.transform.gameObject.GetComponent<BoxCollider>().size.x,
-                                        hit.transform.gameObject.GetComponent<BoxCollider>().size.y,
-                                        _npcBackSideBoxCastSize));
+            Gizmos.DrawCube(new Vector3(this.gameObject.transform.position.x, this.transform.position.y, hit.collider.bounds.center.z) + new Vector3(0f, 0f, (float)(-(_NonSpawningAreaSize / 2))), new Vector3(hit.transform.gameObject.GetComponent<BoxCollider>().bounds.size.x, hit.transform.gameObject.GetComponent<BoxCollider>().bounds.size.y, _NCPCarBackSideBoxCastSize));
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(new Vector3(this.gameObject.transform.position.x, this.transform.position.y, hit.collider.bounds.center.z) + new Vector3(0f, 0f, (float)(-(_NonSpawningAreaSize / 2))), transform.forward * (_raycastLength - Vector3.Distance(hit.transform.gameObject.GetComponent<BoxCollider>().bounds.center + new Vector3(0f, 0f, (float)(-(_NonSpawningAreaSize / 2))), this.transform.position)));
+            Gizmos.DrawWireCube(this.transform.position + transform.forward * _raycastLength, _halfExtents);
+
         }
         else
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawRay(transform.position, transform.forward * _raycastLength);
-            Gizmos.DrawCube(this.transform.position + transform.forward * _raycastLength, _halfExtents);
+            Gizmos.DrawWireCube(this.transform.position + transform.forward * _raycastLength, _halfExtents);
 
         }
     }
