@@ -7,105 +7,25 @@ namespace NWR.PlayingMode
 {
     public class NPC_CarSpawner : MonoBehaviour
     {
-        public static NPC_CarSpawner Instance { get; private set; }
+        [Header("References:")]
+        [SerializeField] private List<GameObject> _listOfSpawnZonesGameObjects;
 
-        [Header("Settings:")]
 
-        [Header("Info box:")]
-        [SerializeField] private List<LockedZonesFromSpawnNPC> _zones = new List<LockedZonesFromSpawnNPC>();
-
-        [Serializable]
-        private class LockedZonesFromSpawnNPC
+        private void LateUpdate()
         {
-            [SerializeField] private GameObject objectThatLockingZone;
-            [SerializeField] private float fromPreventingToSpawnNPC;
-            [SerializeField] private float toPreventingToSpawnNPC;
-
-            public LockedZonesFromSpawnNPC(ref GameObject carGameObject, float from, float to)
+            if (Input.GetKeyDown(KeyCode.G))
             {
-                this.objectThatLockingZone = carGameObject;
-                this.fromPreventingToSpawnNPC = from;
-                this.toPreventingToSpawnNPC = to;
-            }
-
-            public GameObject GetGameObject() => objectThatLockingZone;
-
-            // ! Important
-            // TODO: convert with 2 methods in 1
-            public void UpdateFrontLockBoundary(float from) => fromPreventingToSpawnNPC = from;
-            public void UpdateRearLockBoundary(float to) => toPreventingToSpawnNPC = to;
-            public void GetFromAndToBoundaries(out float from, out float to)
-            {
-                from = fromPreventingToSpawnNPC;
-                to = toPreventingToSpawnNPC;
+                SpawnNPC_CarGameObject();
             }
         }
 
 
-
-        private void Awake()
+        private void SpawnNPC_CarGameObject()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(this.gameObject);
-        }
+            System.Random rnmGenerator = new System.Random();
+            GameObject rnmlyChoosenSideToSpawn = _listOfSpawnZonesGameObjects[rnmGenerator.Next(0, _listOfSpawnZonesGameObjects.Count)];
 
-        private void Update()
-        {
-            UpdateLockedZonesPosition();
-        }
-
-        private void UpdateLockedZonesPosition()
-        {
-            if (_zones.Count == 0)
-                return;
-
-            foreach (LockedZonesFromSpawnNPC zone in _zones)
-            {
-                float newFromBoundary;
-                float newToBoundary;
-
-                zone.GetGameObject().GetComponent<NPC_Settings>().GetBoundaries(out newFromBoundary, out newToBoundary);
-
-                zone.UpdateFrontLockBoundary(newFromBoundary);
-                zone.UpdateRearLockBoundary(newToBoundary);
-            }
-
-            // * Shows debug info for each zone
-            foreach (LockedZonesFromSpawnNPC zone in _zones)
-            {
-                float fromBoundaryForThisZone;
-                float toBoundaryForThisZone;
-                zone.GetFromAndToBoundaries(out fromBoundaryForThisZone, out toBoundaryForThisZone);
-                Debug.Log("Object name: " + zone.GetGameObject().name + "have params: " + fromBoundaryForThisZone + " " + toBoundaryForThisZone);
-            }
-        }
-
-        public void AddCarThatCollidingWithSpawnZones(GameObject car)
-        {
-            float fromBoundary;
-            float toBoundary;
-
-            car.GetComponent<NPC_Settings>().GetBoundaries(out fromBoundary, out toBoundary);
-            _zones.Add(new LockedZonesFromSpawnNPC(ref car, fromBoundary, toBoundary));
-        }
-
-        public void RemoveCarThatCollidingWithSpawnZones(GameObject car)
-        {
-            foreach (LockedZonesFromSpawnNPC zone in _zones)
-            {
-                if (zone.GetGameObject() == car)
-                    _zones.Remove(zone);
-            }
-        }
-
-        public bool CheckIfLockedZonesContainsGameObject(GameObject car)
-        {
-            foreach (LockedZonesFromSpawnNPC zone in _zones)
-                if (zone.GetGameObject() == car) return true;
-
-            return false;
+            GameObject npc_Car = Instantiate(Resources.Load("NPC"), rnmlyChoosenSideToSpawn.GetComponent<BOXCAST_CAR_RAY>().GetPossibleSpawnPosition(), Quaternion.identity) as GameObject;
         }
     }
 }

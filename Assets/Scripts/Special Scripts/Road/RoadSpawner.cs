@@ -17,11 +17,11 @@ namespace NWR.PlayingMode
             else
                 Destroy(this.gameObject);
 
+            Road.OnMoveLastPlacedRoad += MoveRoad;
         }
 
         public void MoveRoad()
         {
-            Debug.Log("Moving road...");
             float roadPosition = listOfRoadsGameObjects.Min(x => x.transform.position.z);
             GameObject roadToMove = listOfRoadsGameObjects.First(x => x.transform.position.z == roadPosition);
             float roadPositionToMove = listOfRoadsGameObjects.Max(x => x.transform.position.z);

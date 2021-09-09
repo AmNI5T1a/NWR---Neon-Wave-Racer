@@ -1,40 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class NPC_Settings : MonoBehaviour
+namespace NWR.PlayingMode
 {
-    [Header("Settings")]
-    [SerializeField] private float _frontBlockedZoneRangeFromSpawningNPC;
-    [SerializeField] private float _rearBlockedZoneRangeFromSpawningNPC;
-
-    [Header("Info box:")]
-    [ReadOnly, SerializeField] private float _front_Z_LockedFromSpawnZone;
-    [ReadOnly, SerializeField] private float _rear_Z_LockedFromSpawnZone;
-
-
-    private void Update()
+    public class NPC_Settings : MonoBehaviour, I_NPC_CarDestroyer
     {
-        _front_Z_LockedFromSpawnZone = this.gameObject.GetComponent<BoxCollider>().bounds.center.z + _frontBlockedZoneRangeFromSpawningNPC;
-        _rear_Z_LockedFromSpawnZone = this.gameObject.GetComponent<BoxCollider>().bounds.center.z - _rearBlockedZoneRangeFromSpawningNPC;
-    }
+        [SerializeField] float cooldownBetweenPossibleToDestroy = 3f;
+        [SerializeField] bool possibleToDestroy = false;
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Bounds colliderBounds = this.gameObject.GetComponent<BoxCollider>().bounds;
-        Gizmos.DrawCube(colliderBounds.center + new Vector3(0f, 0f, _frontBlockedZoneRangeFromSpawningNPC), new Vector3(colliderBounds.size.x, colliderBounds.size.y, 0f));
-        Gizmos.DrawCube(colliderBounds.center + new Vector3(0f, 0f, -_rearBlockedZoneRangeFromSpawningNPC), new Vector3(colliderBounds.size.x, colliderBounds.size.y, 0f));
-
-        Gizmos.DrawRay(colliderBounds.center + new Vector3((colliderBounds.size.x / 2), (colliderBounds.size.y / 2), _frontBlockedZoneRangeFromSpawningNPC), -transform.forward * (Vector3.Distance(colliderBounds.center + new Vector3(0f, 0f, _frontBlockedZoneRangeFromSpawningNPC), colliderBounds.center + new Vector3(0f, 0f, -_rearBlockedZoneRangeFromSpawningNPC))));
-        Gizmos.DrawRay(colliderBounds.center + new Vector3(-(colliderBounds.size.x / 2), (colliderBounds.size.y / 2), _frontBlockedZoneRangeFromSpawningNPC), -transform.forward * (Vector3.Distance(colliderBounds.center + new Vector3(0f, 0f, _frontBlockedZoneRangeFromSpawningNPC), colliderBounds.center + new Vector3(0f, 0f, -_rearBlockedZoneRangeFromSpawningNPC))));
-        Gizmos.DrawRay(colliderBounds.center + new Vector3((colliderBounds.size.x / 2), -(colliderBounds.size.y / 2), _frontBlockedZoneRangeFromSpawningNPC), -transform.forward * (Vector3.Distance(colliderBounds.center + new Vector3(0f, 0f, _frontBlockedZoneRangeFromSpawningNPC), colliderBounds.center + new Vector3(0f, 0f, -_rearBlockedZoneRangeFromSpawningNPC))));
-        Gizmos.DrawRay(colliderBounds.center + new Vector3(-(colliderBounds.size.x / 2), -(colliderBounds.size.y / 2), _frontBlockedZoneRangeFromSpawningNPC), -transform.forward * (Vector3.Distance(colliderBounds.center + new Vector3(0f, 0f, _frontBlockedZoneRangeFromSpawningNPC), colliderBounds.center + new Vector3(0f, 0f, -_rearBlockedZoneRangeFromSpawningNPC))));
-    }
-
-    public void GetBoundaries(out float front, out float rear)
-    {
-        front = _front_Z_LockedFromSpawnZone;
-        rear = _rear_Z_LockedFromSpawnZone;
+        private void Start()
+        {
+            cooldownBetweenPossibleToDestroy -= Time.deltaTime;
+            if (cooldownBetweenPossibleToDestroy <= 0)
+                possibleToDestroy = true;
+        }
+        public void DestroyGameObject()
+        {
+            if (possibleToDestroy)
+                Destroy(this.gameObject);
+        }
     }
 }

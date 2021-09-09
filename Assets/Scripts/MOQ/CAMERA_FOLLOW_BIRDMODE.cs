@@ -10,7 +10,7 @@ public class CAMERA_FOLLOW_BIRDMODE : MonoBehaviour
 
     void Start()
     {
-        _carTranform = GameObject.FindGameObjectWithTag("Car").gameObject.transform;
+        _carTranform = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
     }
 
     void Update()

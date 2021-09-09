@@ -24,13 +24,9 @@ namespace NWR.PlayingMode
 
         private void Start()
         {
-            // TODO: min speed for player car
+            // ! Set min speed before give input to player
+            // TODO: Logic to set minimum speed in the start of the game
 
-        }
-
-        private IEnumerator OneDirectionOfSpawningCars()
-        {
-            yield return null;
         }
     }
 }

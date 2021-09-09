@@ -1,38 +1,52 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NWR.PlayingMode
 {
     public class BOXCAST_CAR_RAY : MonoBehaviour
     {
+        [SerializeField] private float _rayLength;
+        [SerializeField] private Vector3 _triggerZoneSize;
+        [SerializeField] private LayerMask _layerMaskForTrigger;
+
+        [Header("Stats:")]
+        [SerializeField] private Vector3 possibleSpawnPosition = new Vector3();
         private void OnTriggerEnter(Collider enteredCollider)
         {
-            if (enteredCollider.gameObject.layer == 14)
-            {
-                if (!NPC_CarSpawner.Instance.CheckIfLockedZonesContainsGameObject(enteredCollider.gameObject))
-                {
-                    NPC_CarSpawner.Instance.AddCarThatCollidingWithSpawnZones(enteredCollider.gameObject);
-                    Debug.Log("! New car in list of cars that colliding with spawn zones (name of object: " + enteredCollider.gameObject.name + ")");
-                }
-            }
-        }
-
-        private void OnTriggerExit(Collider leavedCollider)
-        {
-            if (leavedCollider.gameObject.layer == 14)
-            {
-                if (NPC_CarSpawner.Instance.CheckIfLockedZonesContainsGameObject(leavedCollider.gameObject))
-                {
-                    NPC_CarSpawner.Instance.RemoveCarThatCollidingWithSpawnZones(leavedCollider.gameObject);
-                    Debug.Log("! Removed car from the list of cars which colliding with spawn zones (name of object: " + leavedCollider.gameObject.name + ")");
-                }
-            }
+            if (enteredCollider.gameObject.tag == "NPC")
+                Destroy(enteredCollider.gameObject);
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(this.gameObject.GetComponent<BoxCollider>().bounds.center, this.gameObject.GetComponent<BoxCollider>().size);
+            RaycastHit hit;
+            bool isHit = false;
+            isHit = Physics.BoxCast(this.transform.position, _triggerZoneSize / 2, this.transform.forward, out hit, Quaternion.identity, _rayLength, _layerMaskForTrigger);
+
+            if (isHit)
+            {
+                possibleSpawnPosition = this.transform.position - new Vector3(0f, 0f, hit.distance);
+
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireCube(this.transform.position - new Vector3(0f, 0f, hit.distance), _triggerZoneSize);
+                Gizmos.DrawRay(this.transform.position, this.transform.forward - new Vector3(0f, 0f, hit.distance));
+
+                if (hit.transform.gameObject.tag == "Car")
+                    hit.transform.gameObject.GetComponent<I_NPC_CarDestroyer>().DestroyGameObject();
+            }
+            else
+            {
+                possibleSpawnPosition = this.transform.position - new Vector3(0f, 0f, _rayLength);
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireCube(this.transform.position - new Vector3(0f, 0f, _rayLength), _triggerZoneSize);
+                Gizmos.DrawRay(this.transform.position, this.transform.forward - new Vector3(0f, 0f, _rayLength));
+            }
         }
+
+        public Vector3 GetPossibleSpawnPosition() => possibleSpawnPosition;
     }
 }
